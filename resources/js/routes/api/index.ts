@@ -3,6 +3,7 @@ import compras from './compras'
 import ventas from './ventas'
 import productos from './productos'
 import proveedores from './proveedores'
+import agente from './agente'
 import dashboard from './dashboard'
 /**
 * @see \App\Http\Controllers\ModuloSidebarController::modulosSidebar
@@ -424,6 +425,7 @@ compras,
 ventas,
 productos,
 proveedores,
+agente,
 dashboard,
 buscarProductos,
 stockProducto,

@@ -37,6 +37,7 @@ import VehiculoController from './VehiculoController'
 import Web from './Web'
 import ReportePreciosController from './ReportePreciosController'
 import ReporteInventarioController from './ReporteInventarioController'
+import AgenteController from './AgenteController'
 import Settings from './Settings'
 import Auth from './Auth'
 const Controllers = {
@@ -79,6 +80,7 @@ VehiculoController,
 Web,
 ReportePreciosController,
 ReporteInventarioController,
+AgenteController,
 Settings,
 Auth,
 }

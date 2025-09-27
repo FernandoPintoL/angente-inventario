@@ -72,7 +72,7 @@ class ModuloSidebarSeeder extends Seeder
             ['titulo' => 'Productos Vencidos', 'ruta' => '/inventario/vencidos', 'icono' => 'AlertTriangle', 'orden' => 4, 'permisos' => ['inventario.vencidos']],
             ['titulo' => 'Movimientos', 'ruta' => '/inventario/movimientos', 'icono' => 'ArrowUpDown', 'orden' => 5, 'permisos' => ['inventario.movimientos']],
             ['titulo' => 'Transferencias', 'ruta' => '/inventario/transferencias', 'icono' => 'ArrowRightLeft', 'orden' => 6, 'permisos' => ['inventario.transferencias.index']],
-            ['titulo' => 'Mermas', 'ruta' => '/inventario/mermas', 'icono' => 'Package2', 'orden' => 7, 'permisos' => ['inventario.mermas.index']],
+            ['titulo' => 'Mermas', 'ruta' => '/inventario/mermas', 'icono' => 'PackageX', 'orden' => 7, 'permisos' => ['inventario.mermas.index']],
             ['titulo' => 'Ajustes', 'ruta' => '/inventario/ajuste', 'icono' => 'Settings', 'orden' => 8, 'permisos' => ['inventario.ajuste.form']],
             ['titulo' => 'Reportes', 'ruta' => '/inventario/reportes', 'icono' => 'FileText', 'orden' => 9, 'permisos' => ['reportes.inventario.stock-actual']],
         ];
@@ -95,7 +95,7 @@ class ModuloSidebarSeeder extends Seeder
         }
 
         // Módulo de Ventas
-        $ventas = ModuloSidebar::firstOrCreate(
+        /* $ventas = ModuloSidebar::firstOrCreate(
             ['titulo' => 'Ventas', 'ruta' => '/ventas', 'es_submenu' => false],
             [
                 'icono'       => 'ShoppingCart',
@@ -128,7 +128,7 @@ class ModuloSidebarSeeder extends Seeder
                     'permisos' => $submenu['permisos'],
                 ]
             );
-        }
+        } */
 
         // Módulo de Compras
         $compras = ModuloSidebar::firstOrCreate(
@@ -207,7 +207,7 @@ class ModuloSidebarSeeder extends Seeder
         }
 
         // Módulo de Logística
-        $logistica = ModuloSidebar::firstOrCreate(
+        /* $logistica = ModuloSidebar::firstOrCreate(
             ['titulo' => 'Logística', 'ruta' => '/logistica/dashboard', 'es_submenu' => false],
             [
                 'icono'       => 'Truck',
@@ -258,6 +258,31 @@ class ModuloSidebarSeeder extends Seeder
             ]
         );
 
+        // Submódulos de Proformas
+        $submenuProformas = [
+            ['titulo' => 'Lista de Proformas', 'ruta' => '/proformas', 'icono' => 'FileText', 'orden' => 1, 'permisos' => ['proformas.index']],
+            ['titulo' => 'Nueva Proforma', 'ruta' => '/proformas/create', 'icono' => 'Plus', 'orden' => 2, 'permisos' => ['proformas.create']],
+            ['titulo' => 'Proformas Pendientes', 'ruta' => '/proformas/pendientes', 'icono' => 'Clock', 'orden' => 3, 'permisos' => ['proformas.pendientes']],
+            ['titulo' => 'Proformas Aprobadas', 'ruta' => '/proformas/aprobadas', 'icono' => 'CheckCircle', 'orden' => 4, 'permisos' => ['proformas.aprobadas']],
+        ];
+
+        foreach ($submenuProformas as $submenu) {
+            ModuloSidebar::firstOrCreate(
+                [
+                    'titulo'          => $submenu['titulo'],
+                    'ruta'            => $submenu['ruta'],
+                    'es_submenu'      => true,
+                    'modulo_padre_id' => $proformas->id,
+                ],
+                [
+                    'icono'    => $submenu['icono'],
+                    'orden'    => $submenu['orden'],
+                    'activo'   => true,
+                    'permisos' => $submenu['permisos'],
+                ]
+            );
+        }*/
+
         // Módulo de Reportes
         $reportes = ModuloSidebar::firstOrCreate(
             ['titulo' => 'Reportes', 'ruta' => '/reportes/precios', 'es_submenu' => false],
@@ -307,14 +332,15 @@ class ModuloSidebarSeeder extends Seeder
                 'orden'       => 9,
                 'categoria'   => 'Finanzas',
                 'activo'      => true,
+                'permisos'    => ['contabilidad.asientos.index'],
             ]
         );
 
         // Submódulos de Contabilidad
         $submenuContabilidad = [
-            ['titulo' => 'Asientos Contables', 'ruta' => '/contabilidad/asientos', 'icono' => 'BookOpen', 'orden' => 1],
-            ['titulo' => 'Balance de Comprobación', 'ruta' => '/contabilidad/reportes/balance-comprobacion', 'icono' => 'Scale', 'orden' => 2],
-            ['titulo' => 'Libro Mayor', 'ruta' => '/contabilidad/reportes/libro-mayor', 'icono' => 'Book', 'orden' => 3],
+            ['titulo' => 'Asientos Contables', 'ruta' => '/contabilidad/asientos', 'icono' => 'BookOpen', 'orden' => 1, 'permisos' => ['contabilidad.asientos.index']],
+            ['titulo' => 'Balance de Comprobación', 'ruta' => '/contabilidad/reportes/balance-comprobacion', 'icono' => 'Scale', 'orden' => 2, 'permisos' => ['contabilidad.balance.index']],
+            ['titulo' => 'Libro Mayor', 'ruta' => '/contabilidad/reportes/libro-mayor', 'icono' => 'Book', 'orden' => 3, 'permisos' => ['contabilidad.libro-mayor.index']],
         ];
 
         foreach ($submenuContabilidad as $submenu) {
@@ -326,16 +352,17 @@ class ModuloSidebarSeeder extends Seeder
                     'modulo_padre_id' => $contabilidad->id,
                 ],
                 [
-                    'icono'  => $submenu['icono'],
-                    'orden'  => $submenu['orden'],
-                    'activo' => true,
+                    'icono'    => $submenu['icono'],
+                    'orden'    => $submenu['orden'],
+                    'activo'   => true,
+                    'permisos' => $submenu['permisos'],
                 ]
             );
         } */
 
         // Módulos principales sin submódulos
         $modulosPrincipales = [
-            [
+            /* [
                 'titulo'      => 'Gestión de Cajas',
                 'ruta'        => '/cajas',
                 'icono'       => 'Wallet',
@@ -343,7 +370,7 @@ class ModuloSidebarSeeder extends Seeder
                 'orden'       => 10,
                 'categoria'   => 'Finanzas',
                 'permisos'    => ['cajas.index'],
-            ],
+            ], */
             [
                 'titulo'      => 'Almacenes',
                 'ruta'        => '/almacenes',
@@ -362,10 +389,10 @@ class ModuloSidebarSeeder extends Seeder
                 'categoria'   => 'Comercial',
                 'permisos'    => ['proveedores.manage'],
             ],
-            [
+            /* [
                 'titulo'      => 'Clientes',
                 'ruta'        => '/clientes',
-                'icono'       => 'UserCheck',
+                'icono'       => 'Users',
                 'descripcion' => 'Gestión de clientes',
                 'orden'       => 13,
                 'categoria'   => 'Comercial',
@@ -388,7 +415,7 @@ class ModuloSidebarSeeder extends Seeder
                 'orden'       => 15,
                 'categoria'   => 'Configuración',
                 'permisos'    => ['monedas.manage'],
-            ],
+            ], */
             [
                 'titulo'      => 'Tipo Pagos',
                 'ruta'        => '/tipos-pago',
@@ -414,13 +441,26 @@ class ModuloSidebarSeeder extends Seeder
             );
         }
 
+        // Módulo de Agente de Inventario
+        $agente = ModuloSidebar::firstOrCreate(
+            ['titulo' => 'Agente IA', 'ruta' => '/agente', 'es_submenu' => false],
+            [
+                'icono'       => 'Bot',
+                'descripcion' => 'Asistente inteligente de inventario',
+                'orden'       => 17,
+                'categoria'   => 'Inventario',
+                'activo'      => true,
+                'permisos'    => ['agente.use'],
+            ]
+        );
+
         // Módulo de Administración
         $administracion = ModuloSidebar::firstOrCreate(
             ['titulo' => 'Administración', 'ruta' => '/usuarios', 'es_submenu' => false],
             [
                 'icono'       => 'Settings',
                 'descripcion' => 'Configuración del sistema',
-                'orden'       => 17,
+                'orden'       => 18,
                 'categoria'   => 'Administración',
                 'activo'      => true,
                 'permisos'    => ['usuarios.index'],

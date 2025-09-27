@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(php artisan:*)",
+      "Bash(composer:*)",
+      "Bash(curl -X GET \"https://web-production-37890.up.railway.app/api/v1/health\" -H \"Content-Type: application/json\")",
+      "Bash(curl -X GET \"http://192.168.100.21:8000/api/agente/health\" -H \"Content-Type: application/json\")",
+      "Bash(curl:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

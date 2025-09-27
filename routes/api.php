@@ -194,3 +194,15 @@ Route::group(['prefix' => 'proveedores'], function () {
     Route::post('/', [ProveedorController::class, 'storeApi']);
     Route::get('buscar', [ProveedorController::class, 'buscarApi']);
 });
+
+// ==========================================
+// 🤖 RUTAS API PARA AGENTE DE INVENTARIO
+// ==========================================
+Route::middleware(['auth:sanctum'])->prefix('agente')->name('api.agente.')->group(function () {
+    Route::get('health', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'health'])->name('health');
+    Route::post('ask', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'ask'])->middleware('permission:agente.use')->name('ask');
+    Route::get('historial', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'historial'])->middleware('permission:agente.history')->name('historial');
+    Route::get('conversacion/{id}', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'conversacion'])->middleware('permission:agente.history')->name('conversacion');
+    Route::delete('historial', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'eliminarHistorial'])->middleware('permission:agente.history')->name('eliminar-historial');
+    Route::post('export-report', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'exportReport'])->middleware('permission:agente.use')->name('export-report');
+});

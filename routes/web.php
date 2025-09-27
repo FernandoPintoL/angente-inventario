@@ -273,6 +273,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('export', [\App\Http\Controllers\ReporteInventarioController::class, 'export'])->name('export');
         });
     });
+
+    // Rutas para el Agente de Inventario
+    Route::prefix('agente')->name('agente.')->middleware('permission:agente.use')->group(function () {
+        Route::get('/', [\App\Http\Controllers\AgenteController::class, 'index'])->name('index');
+        Route::get('dashboard', [\App\Http\Controllers\AgenteController::class, 'dashboard'])->name('dashboard');
+    });
+
+    // Rutas API Web para el Agente de Inventario (usando auth:web)
+    Route::prefix('api/agente')->name('api.agente.web.')->group(function () {
+        Route::get('health', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'health'])->name('health');
+        Route::post('ask', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'ask'])->middleware('permission:agente.use')->name('ask');
+        Route::get('historial', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'historial'])->middleware('permission:agente.history')->name('historial');
+        Route::get('conversacion/{id}', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'conversacion'])->middleware('permission:agente.history')->name('conversacion');
+        Route::delete('historial', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'eliminarHistorial'])->middleware('permission:agente.history')->name('eliminar-historial');
+        Route::post('export-report', [\App\Http\Controllers\Api\AgenteInventarioController::class, 'exportReport'])->middleware('permission:agente.use')->name('export-report');
+    });
 });
 
 require __DIR__ . '/settings.php';
