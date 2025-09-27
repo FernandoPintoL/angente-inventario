@@ -23,7 +23,8 @@ import {
     DollarSign,
     Building2,
     ClipboardList,
-    LucideIcon
+    LucideIcon,
+    BotIcon,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -45,6 +46,7 @@ const iconMap: Record<string, LucideIcon> = {
     DollarSign,
     Building2,
     ClipboardList,
+    BotIcon,
 };
 
 // Tipos para los módulos de la API
