@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
 export const health = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ health.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
 health.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ health.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
 health.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ health.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
 health.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ health.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
     const healthForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ health.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
         healthForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ health.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::health
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:24
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:25
  * @route '/api/agente/health'
  */
         healthForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ health.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     health.form = healthForm
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::ask
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:39
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:40
  * @route '/api/agente/ask'
  */
 export const ask = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ ask.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::ask
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:39
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:40
  * @route '/api/agente/ask'
  */
 ask.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ ask.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::ask
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:39
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:40
  * @route '/api/agente/ask'
  */
 ask.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -113,7 +113,7 @@ ask.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::ask
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:39
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:40
  * @route '/api/agente/ask'
  */
     const askForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -123,7 +123,7 @@ ask.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::ask
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:39
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:40
  * @route '/api/agente/ask'
  */
         askForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -134,7 +134,7 @@ ask.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     ask.form = askForm
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
 export const historial = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -149,7 +149,7 @@ historial.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
 historial.url = (options?: RouteQueryOptions) => {
@@ -158,7 +158,7 @@ historial.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
 historial.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -167,7 +167,7 @@ historial.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
 historial.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -177,7 +177,7 @@ historial.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
     const historialForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -187,7 +187,7 @@ historial.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
         historialForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -196,7 +196,7 @@ historial.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::historial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:116
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:117
  * @route '/api/agente/historial'
  */
         historialForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -212,7 +212,7 @@ historial.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     historial.form = historialForm
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
 export const conversacion = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -227,7 +227,7 @@ conversacion.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
 conversacion.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -255,7 +255,7 @@ conversacion.url = (args: { id: string | number } | [id: string | number ] | str
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
 conversacion.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -264,7 +264,7 @@ conversacion.get = (args: { id: string | number } | [id: string | number ] | str
 })
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
 conversacion.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -274,7 +274,7 @@ conversacion.head = (args: { id: string | number } | [id: string | number ] | st
 
     /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
     const conversacionForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -284,7 +284,7 @@ conversacion.head = (args: { id: string | number } | [id: string | number ] | st
 
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
         conversacionForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -293,7 +293,7 @@ conversacion.head = (args: { id: string | number } | [id: string | number ] | st
         })
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::conversacion
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:139
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:140
  * @route '/api/agente/conversacion/{id}'
  */
         conversacionForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -309,7 +309,7 @@ conversacion.head = (args: { id: string | number } | [id: string | number ] | st
     conversacion.form = conversacionForm
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::eliminarHistorial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:160
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:161
  * @route '/api/agente/historial'
  */
 export const eliminarHistorial = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -324,7 +324,7 @@ eliminarHistorial.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::eliminarHistorial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:160
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:161
  * @route '/api/agente/historial'
  */
 eliminarHistorial.url = (options?: RouteQueryOptions) => {
@@ -333,7 +333,7 @@ eliminarHistorial.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::eliminarHistorial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:160
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:161
  * @route '/api/agente/historial'
  */
 eliminarHistorial.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -343,7 +343,7 @@ eliminarHistorial.delete = (options?: RouteQueryOptions): RouteDefinition<'delet
 
     /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::eliminarHistorial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:160
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:161
  * @route '/api/agente/historial'
  */
     const eliminarHistorialForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -358,7 +358,7 @@ eliminarHistorial.delete = (options?: RouteQueryOptions): RouteDefinition<'delet
 
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::eliminarHistorial
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:160
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:161
  * @route '/api/agente/historial'
  */
         eliminarHistorialForm.delete = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -374,7 +374,7 @@ eliminarHistorial.delete = (options?: RouteQueryOptions): RouteDefinition<'delet
     eliminarHistorial.form = eliminarHistorialForm
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::exportReport
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:171
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:172
  * @route '/api/agente/export-report'
  */
 export const exportReport = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -389,7 +389,7 @@ exportReport.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::exportReport
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:171
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:172
  * @route '/api/agente/export-report'
  */
 exportReport.url = (options?: RouteQueryOptions) => {
@@ -398,7 +398,7 @@ exportReport.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::exportReport
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:171
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:172
  * @route '/api/agente/export-report'
  */
 exportReport.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -408,7 +408,7 @@ exportReport.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::exportReport
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:171
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:172
  * @route '/api/agente/export-report'
  */
     const exportReportForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -418,7 +418,7 @@ exportReport.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AgenteInventarioController::exportReport
- * @see app/Http/Controllers/Api/AgenteInventarioController.php:171
+ * @see app/Http/Controllers/Api/AgenteInventarioController.php:172
  * @route '/api/agente/export-report'
  */
         exportReportForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

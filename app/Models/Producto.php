@@ -67,6 +67,16 @@ class Producto extends Model
         return $this->hasMany(StockProducto::class, 'producto_id');
     }
 
+    /**
+     * Relación para stock próximo a vencer (para usar con with())
+     */
+    public function stockProximoVencerRelacion()
+    {
+        return $this->hasMany(StockProducto::class, 'producto_id')
+                    ->whereNotNull('fecha_vencimiento')
+                    ->where('cantidad', '>', 0);
+    }
+
     public function unidad()
     {
         return $this->belongsTo(UnidadMedida::class, 'unidad_medida_id');

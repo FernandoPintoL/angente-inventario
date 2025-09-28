@@ -4,7 +4,8 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import { useAgent } from '@/contexts/AgentContext';
 import React, { useEffect, useState, useCallback } from 'react';
 import {
     Package,
@@ -25,6 +26,8 @@ import {
     ClipboardList,
     LucideIcon,
     BotIcon,
+    ChartPie,
+    ChartSpline,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -47,6 +50,8 @@ const iconMap: Record<string, LucideIcon> = {
     Building2,
     ClipboardList,
     BotIcon,
+    ChartPie,
+    ChartSpline,
 };
 
 // Tipos para los módulos de la API
@@ -101,6 +106,57 @@ const useSidebarModules = () => {
 
 const footerNavItems: NavItem[] = [];
 
+// Componente para el botón del agente
+function AgentButton() {
+    const { canUseAgent, agentHealth } = useAgent();
+    const { url } = usePage();
+
+    if (!canUseAgent) {
+        return null;
+    }
+
+    const statusColor = agentHealth.status === 'healthy' ? 'bg-green-500' : 'bg-red-500';
+    const statusText = agentHealth.status === 'healthy' ? 'Conectado' : 'Desconectado';
+    const isActive = url.startsWith('/agente');
+
+    return (
+        <SidebarMenuItem>
+            <SidebarMenuButton
+                size="lg"
+                asChild
+                tooltip={`Agente de Inventario - ${statusText}`}
+                className={`relative group hover:bg-accent hover:text-accent-foreground transition-all duration-200 ${
+                    isActive ? 'bg-accent text-accent-foreground shadow-sm' : ''
+                }`}
+            >
+                <Link href="/agente" prefetch>
+                    <div className="flex items-center gap-3 relative w-full">
+                        <div className="relative flex-shrink-0">
+                            <BotIcon className={`h-5 w-5 transition-colors ${
+                                isActive
+                                    ? 'text-primary'
+                                    : 'text-primary group-hover:text-primary/80'
+                            }`} />
+                            {/* Indicador de estado */}
+                            <div
+                                className={`absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full border border-background ${statusColor} ${
+                                    agentHealth.status === 'healthy' ? 'animate-pulse' : ''
+                                }`}
+                            />
+                        </div>
+                        <div className="flex flex-col min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
+                            <span className="font-medium text-sm truncate">Agente IA</span>
+                            <span className="text-xs text-muted-foreground truncate">
+                                {statusText}
+                            </span>
+                        </div>
+                    </div>
+                </Link>
+            </SidebarMenuButton>
+        </SidebarMenuItem>
+    );
+}
+
 export function AppSidebar() {
     const { modules, loading, error } = useSidebarModules();
 
@@ -117,6 +173,8 @@ export function AppSidebar() {
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
+                        {/* Botón del Agente */}
+                        <AgentButton />
                     </SidebarMenu>
                 </SidebarHeader>
 
@@ -147,6 +205,8 @@ export function AppSidebar() {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
+                    {/* Botón del Agente */}
+                    <AgentButton />
                 </SidebarMenu>
             </SidebarHeader>
 

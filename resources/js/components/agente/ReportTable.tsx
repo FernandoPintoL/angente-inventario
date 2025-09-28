@@ -121,18 +121,29 @@ export function ReportTable({
     setExportLoading(format);
 
     try {
-      const params = new URLSearchParams({
+      const payload = {
         format,
+        title,
+        data: sortedData,
+        columns: columns.map(col => ({
+          key: col.key,
+          label: col.label
+        }))
+      };
+
+      const queryParams = new URLSearchParams({
         search: searchTerm,
         sort_column: sortColumn || '',
-        sort_direction: sortDirection || '',
-        title: title
+        sort_direction: sortDirection || ''
       });
 
-      const response = await fetch(`${exportEndpoint}?${params}`, {
+      const response = await fetch(`${exportEndpoint}?${queryParams}`, {
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
         },
+        body: JSON.stringify(payload)
       });
 
       if (!response.ok) {
@@ -169,66 +180,72 @@ export function ReportTable({
 
   return (
     <Card className={cn("w-full", className)}>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <EyeIcon className="size-5 text-primary" />
-            {title}
-          </CardTitle>
+      <CardHeader className="pb-3">
+        {/* Título */}
+        <div className="flex items-center gap-2 mb-3">
+          <EyeIcon className="size-5 text-primary" />
+          <CardTitle className="text-base">{title}</CardTitle>
+        </div>
 
-          <div className="flex items-center gap-2">
-            {searchable && (
-              <div className="relative">
-                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-input rounded-md bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring w-64"
-                />
-              </div>
-            )}
+        {/* Controles responsivos */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          {/* Buscador */}
+          {searchable && (
+            <div className="relative flex-1 max-w-sm">
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2 border border-input rounded-md bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring w-full"
+              />
+            </div>
+          )}
 
-            {showExportOptions && exportEndpoint && (
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleExport('pdf')}
-                  disabled={exportLoading !== null || data.length === 0}
-                  className="flex items-center gap-2"
-                >
-                  {exportLoading === 'pdf' ? (
-                    <Loader2Icon className="size-4 animate-spin" />
-                  ) : (
-                    <FileTextIcon className="size-4" />
-                  )}
-                  PDF
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleExport('excel')}
-                  disabled={exportLoading !== null || data.length === 0}
-                  className="flex items-center gap-2"
-                >
-                  {exportLoading === 'excel' ? (
-                    <Loader2Icon className="size-4 animate-spin" />
-                  ) : (
-                    <FileSpreadsheetIcon className="size-4" />
-                  )}
-                  Excel
-                </Button>
-              </div>
-            )}
-          </div>
+          {/* Botones de exportación */}
+          {showExportOptions && exportEndpoint && (
+            <div className="flex gap-2 flex-shrink-0">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleExport('pdf')}
+                disabled={exportLoading !== null || data.length === 0}
+                className="flex items-center gap-1.5 text-xs px-3"
+              >
+                {exportLoading === 'pdf' ? (
+                  <Loader2Icon className="size-3 animate-spin" />
+                ) : (
+                  <FileTextIcon className="size-3" />
+                )}
+                <span className="hidden sm:inline">PDF</span>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleExport('excel')}
+                disabled={exportLoading !== null || data.length === 0}
+                className="flex items-center gap-1.5 text-xs px-3"
+              >
+                {exportLoading === 'excel' ? (
+                  <Loader2Icon className="size-3 animate-spin" />
+                ) : (
+                  <FileSpreadsheetIcon className="size-3" />
+                )}
+                <span className="hidden sm:inline">Excel</span>
+              </Button>
+            </div>
+          )}
         </div>
 
         {data.length > 0 && (
-          <div className="text-sm text-muted-foreground">
+          <div className="text-xs text-muted-foreground mt-2 sm:mt-3">
             Mostrando {sortedData.length} de {data.length} registros
-            {searchTerm && ` (filtrado por "${searchTerm}")`}
+            {searchTerm && (
+              <span className="block sm:inline sm:ml-1">
+                (filtrado por "{searchTerm}")
+              </span>
+            )}
           </div>
         )}
       </CardHeader>
@@ -252,14 +269,14 @@ export function ReportTable({
                       <th
                         key={column.key}
                         className={cn(
-                          "px-4 py-3 text-left text-sm font-medium text-muted-foreground border-b",
+                          "px-2 sm:px-4 py-2 sm:py-3 text-left text-xs sm:text-sm font-medium text-muted-foreground border-b",
                           column.sortable && "cursor-pointer hover:text-foreground transition-colors",
                           column.width && `w-[${column.width}]`
                         )}
                         onClick={() => column.sortable && handleSort(column.key)}
                       >
                         <div className="flex items-center">
-                          {column.label}
+                          <span className="truncate">{column.label}</span>
                           {column.sortable && getSortIcon(column.key)}
                         </div>
                       </th>
@@ -277,11 +294,13 @@ export function ReportTable({
                       onClick={() => onRowClick?.(row)}
                     >
                       {columns.map((column) => (
-                        <td key={column.key} className="px-4 py-3 text-sm">
-                          {column.formatter
-                            ? column.formatter(row[column.key], row)
-                            : row[column.key] ?? '-'
-                          }
+                        <td key={column.key} className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm">
+                          <div className="truncate max-w-[120px] sm:max-w-none">
+                            {column.formatter
+                              ? column.formatter(row[column.key], row)
+                              : row[column.key] ?? '-'
+                            }
+                          </div>
                         </td>
                       ))}
                     </tr>

@@ -74,7 +74,7 @@ class ModuloSidebarSeeder extends Seeder
             ['titulo' => 'Transferencias', 'ruta' => '/inventario/transferencias', 'icono' => 'ArrowRightLeft', 'orden' => 6, 'permisos' => ['inventario.transferencias.index']],
             ['titulo' => 'Mermas', 'ruta' => '/inventario/mermas', 'icono' => 'PackageX', 'orden' => 7, 'permisos' => ['inventario.mermas.index']],
             ['titulo' => 'Ajustes', 'ruta' => '/inventario/ajuste', 'icono' => 'Settings', 'orden' => 8, 'permisos' => ['inventario.ajuste.form']],
-            ['titulo' => 'Reportes', 'ruta' => '/inventario/reportes', 'icono' => 'FileText', 'orden' => 9, 'permisos' => ['reportes.inventario.stock-actual']],
+            ['titulo' => 'Reportes', 'ruta' => '/inventario/reportes', 'icono' => 'ChartPie', 'orden' => 9, 'permisos' => ['reportes.inventario.stock-actual']],
         ];
 
         foreach ($submenuInventario as $submenu) {
@@ -287,7 +287,7 @@ class ModuloSidebarSeeder extends Seeder
         $reportes = ModuloSidebar::firstOrCreate(
             ['titulo' => 'Reportes', 'ruta' => '/reportes/precios', 'es_submenu' => false],
             [
-                'icono'       => 'BarChart4',
+                'icono'       => 'ChartSpline',
                 'descripcion' => 'Reportes y análisis',
                 'orden'       => 8,
                 'categoria'   => 'Reportes',
@@ -445,7 +445,7 @@ class ModuloSidebarSeeder extends Seeder
         $agente = ModuloSidebar::firstOrCreate(
             ['titulo' => 'Agente IA', 'ruta' => '/agente', 'es_submenu' => false],
             [
-                'icono'       => 'Bot',
+                'icono'       => 'BotIcon',
                 'descripcion' => 'Asistente inteligente de inventario',
                 'orden'       => 17,
                 'categoria'   => 'Inventario',

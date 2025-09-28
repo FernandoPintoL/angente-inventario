@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Head } from '@inertiajs/react';
+import AppLayout from '@/layouts/app-layout';
 import { ChatBot } from '@/components/agente/ChatBot';
 import { ChatHistory } from '@/components/agente/ChatHistory';
+import { VoiceRecorder } from '@/components/agente/VoiceRecorder';
+import { useAgent } from '@/contexts/AgentContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +16,10 @@ import {
   ClockIcon,
   TrendingUpIcon,
   PackageIcon,
-  AlertTriangleIcon
+  AlertTriangleIcon,
+  SparklesIcon,
+  KeyboardIcon,
+  MicIcon
 } from 'lucide-react';
 
 interface ConversationItem {
@@ -33,14 +39,43 @@ interface AgentePageProps {
   };
 }
 
-export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }: AgentePageProps) {
+// Componente interno que usa el contexto del agente
+function AgentePageContent({ canUseAgent, canViewHistory, agentHealth }: AgentePageProps) {
   const [showHistory, setShowHistory] = useState(false);
   const [selectedConversation, setSelectedConversation] = useState<ConversationItem | null>(null);
 
+  // Usar el contexto del agente
+  const {
+    openChat,
+    agentHealth: contextAgentHealth,
+    setQuickQuery,
+    canUseAgent: contextCanUse
+  } = useAgent();
+
+  // Usar los permisos del contexto si están disponibles
+  const hasPermission = contextCanUse || canUseAgent;
+  const healthStatus = contextAgentHealth.status !== 'unknown' ? contextAgentHealth : agentHealth;
+
+  // Abrir el chat automáticamente cuando se entra a la página
+  useEffect(() => {
+    if (hasPermission) {
+      openChat();
+    }
+  }, [hasPermission, openChat]);
+
   const handleConversationSelect = (conversation: ConversationItem) => {
     setSelectedConversation(conversation);
-    // Aquí podrías implementar la lógica para mostrar la conversación seleccionada
     console.log('Conversación seleccionada:', conversation);
+  };
+
+  const handleExampleClick = (query: string) => {
+    setQuickQuery(query);
+  };
+
+  const handleVoiceQuery = (transcript: string) => {
+    if (transcript.trim()) {
+      setQuickQuery(transcript);
+    }
   };
 
   const examples = [
@@ -88,7 +123,7 @@ export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }:
     }
   ];
 
-  if (!canUseAgent) {
+  if (!hasPermission) {
     return (
       <>
         <Head title="Agente de Inventario - Sin Permisos" />
@@ -128,27 +163,53 @@ export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }:
             </p>
           </div>
 
-          {agentHealth && (
+          <div className="flex items-center gap-3">
             <Badge
-              variant={agentHealth.status === 'ok' ? 'default' : 'destructive'}
+              variant={healthStatus?.status === 'healthy' ? 'default' : 'destructive'}
               className="flex items-center gap-2"
             >
               <div className={`size-2 rounded-full ${
-                agentHealth.status === 'ok' ? 'bg-green-500' : 'bg-red-500'
+                healthStatus?.status === 'healthy' ? 'bg-green-500 animate-pulse' : 'bg-red-500'
               }`} />
-              {agentHealth.status === 'ok' ? 'Agente Conectado' : 'Agente Desconectado'}
+              {healthStatus?.status === 'healthy' ? 'Agente Conectado' : 'Agente Desconectado'}
             </Badge>
-          )}
+
+            <div className="hidden lg:flex items-center gap-2 text-xs text-muted-foreground">
+              <KeyboardIcon className="h-3 w-3" />
+              <span>Presiona</span>
+              <Badge variant="outline" className="font-mono text-xs">Ctrl + K</Badge>
+              <span>para acceso rápido</span>
+            </div>
+          </div>
         </div>
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Chat Section */}
           <div className={`${showHistory ? 'lg:col-span-2' : 'lg:col-span-3'}`}>
-            <ChatBot
-              onHistoryToggle={canViewHistory ? () => setShowHistory(!showHistory) : undefined}
-              showHistory={showHistory}
-            />
+            <div className="grid gap-6">
+              {/* Voice Recorder Card */}
+              {/* <Card className="border-l-4 border-l-primary/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MicIcon className="h-5 w-5 text-primary" />
+                    Consulta por Voz
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <VoiceRecorder
+                    onFinalTranscript={handleVoiceQuery}
+                    placeholder="Presiona el micrófono y di tu consulta..."
+                  />
+                </CardContent>
+              </Card> */}
+
+              {/* Chat Bot */}
+              <ChatBot
+                onHistoryToggle={canViewHistory ? () => setShowHistory(!showHistory) : undefined}
+                showHistory={showHistory}
+              />
+            </div>
           </div>
 
           {/* History Section */}
@@ -162,7 +223,7 @@ export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }:
         <br />
 
         {/* Features Section */}
-        {!showHistory && (
+        {/* {!showHistory && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             <div className="lg:col-span-3">
               <h2 className="text-xl font-semibold mb-4">¿Qué puedes hacer?</h2>
@@ -184,33 +245,33 @@ export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }:
               </Card>
             ))}
           </div>
-        )}
+        )} */}
 
         {/* Examples Section */}
-        {!showHistory && (
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Ejemplos de Consultas</h2>
+        {/* {!showHistory && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-2">
+              <SparklesIcon className="h-5 w-5 text-primary" />
+              <h2 className="text-xl font-semibold">Consultas de Ejemplo</h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {examples.map((example, index) => (
                 <Card
                   key={index}
-                  className="cursor-pointer hover:shadow-md transition-shadow"
-                  onClick={() => {
-                    // Aquí podrías implementar auto-completar en el chat
-                    console.log('Ejemplo seleccionado:', example.description);
-                  }}
+                  className="cursor-pointer hover:shadow-lg hover:scale-105 transition-all duration-200 group border-l-4 border-l-transparent hover:border-l-primary"
+                  onClick={() => handleExampleClick(example.description)}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
-                      <div className="size-8 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
-                        <example.icon className="size-4" />
+                      <div className="size-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:from-primary/30 group-hover:to-primary/10 transition-colors">
+                        <example.icon className="size-5 text-primary group-hover:scale-110 transition-transform" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="font-medium text-sm mb-1">{example.title}</div>
-                        <div className="text-xs text-muted-foreground leading-relaxed">
+                        <div className="font-medium text-sm mb-2 group-hover:text-primary transition-colors">{example.title}</div>
+                        <div className="text-xs text-muted-foreground leading-relaxed mb-3">
                           "{example.description}"
                         </div>
-                        <Badge variant="outline" className="mt-2 text-xs">
+                        <Badge variant="outline" className="text-xs">
                           {example.category}
                         </Badge>
                       </div>
@@ -220,10 +281,10 @@ export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }:
               ))}
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Help Section */}
-        {!showHistory && (
+        {/* {!showHistory && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Consejos para mejores resultados</CardTitle>
@@ -235,8 +296,20 @@ export default function AgentePage({ canUseAgent, canViewHistory, agentHealth }:
               <div>• <strong>Usa palabras clave:</strong> "stock", "inventario", "movimientos", "vencimientos"</div>
             </CardContent>
           </Card>
-        )}
+        )} */}
       </div>
     </>
+  );
+}
+
+// Componente principal que envuelve en AppLayout
+export default function AgentePage(props: AgentePageProps) {
+  return (
+    <AppLayout breadcrumbs={[
+      { title: 'Dashboard', href: '/dashboard' },
+      { title: 'Agente de Inventario', href: '/agente' }
+    ]}>
+      <AgentePageContent {...props} />
+    </AppLayout>
   );
 }

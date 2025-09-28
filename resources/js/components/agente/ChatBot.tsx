@@ -2,8 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { SendIcon, BotIcon, UserIcon, Loader2Icon, HistoryIcon, TrashIcon } from 'lucide-react';
+import { SendIcon, BotIcon, UserIcon, Loader2Icon, HistoryIcon, TrashIcon, MicIcon } from 'lucide-react';
 import { DataFormatter } from './DataFormatter';
+import { VoiceInput } from './VoiceInput';
+import { useAgent } from '@/contexts/AgentContext';
 
 interface Message {
   id: string;
@@ -28,7 +30,16 @@ interface ChatBotProps {
 }
 
 export function ChatBot({ className, onHistoryToggle, showHistory = false }: ChatBotProps) {
-  const [messages, setMessages] = useState<Message[]>([
+  const {
+    messages: contextMessages,
+    isLoading: contextIsLoading,
+    sendMessage: contextSendMessage,
+    clearMessages,
+    agentHealth
+  } = useAgent();
+
+  // Usar los mensajes del contexto si están disponibles, sino usar estado local
+  const [localMessages, setLocalMessages] = useState<Message[]>([
     {
       id: '1',
       type: 'agent',
@@ -36,8 +47,12 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
       timestamp: new Date(),
     },
   ]);
+  const [localIsLoading, setLocalIsLoading] = useState(false);
+
+  const messages = contextMessages.length > 0 ? contextMessages : localMessages;
+  const isLoading = contextIsLoading || localIsLoading;
+
   const [inputValue, setInputValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -51,6 +66,14 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
   const sendMessage = async (query: string) => {
     if (!query.trim() || isLoading) return;
 
+    // Si hay contexto disponible, usar el método del contexto
+    if (contextSendMessage && contextMessages.length > 0) {
+      await contextSendMessage(query);
+      setInputValue('');
+      return;
+    }
+
+    // Fallback a implementación local
     const userMessage: Message = {
       id: Date.now().toString(),
       type: 'user',
@@ -58,9 +81,9 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setLocalMessages(prev => [...prev, userMessage]);
     setInputValue('');
-    setIsLoading(true);
+    setLocalIsLoading(true);
 
     try {
       const response = await fetch('/api/agente/ask', {
@@ -94,7 +117,7 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
         status: data.success === false ? 'error' : 'sent',
       };
 
-      setMessages(prev => [...prev, agentMessage]);
+      setLocalMessages(prev => [...prev, agentMessage]);
     } catch (error) {
       console.error('Error enviando mensaje:', error);
 
@@ -106,9 +129,9 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
         status: 'error',
       };
 
-      setMessages(prev => [...prev, errorMessage]);
+      setLocalMessages(prev => [...prev, errorMessage]);
     } finally {
-      setIsLoading(false);
+      setLocalIsLoading(false);
     }
   };
 
@@ -117,15 +140,24 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
     sendMessage(inputValue);
   };
 
+  const handleVoiceTranscript = async (transcript: string) => {
+    if (!transcript.trim()) return;
+    await sendMessage(transcript);
+  };
+
   const clearChat = () => {
-    setMessages([
-      {
-        id: '1',
-        type: 'agent',
-        content: '¡Hola! Soy tu asistente de inventario. Puedo ayudarte con consultas sobre stock, productos, movimientos y más. ¿En qué puedo ayudarte?',
-        timestamp: new Date(),
-      },
-    ]);
+    if (clearMessages && contextMessages.length > 0) {
+      clearMessages();
+    } else {
+      setLocalMessages([
+        {
+          id: '1',
+          type: 'agent',
+          content: '¡Hola! Soy tu asistente de inventario. Puedo ayudarte con consultas sobre stock, productos, movimientos y más. ¿En qué puedo ayudarte?',
+          timestamp: new Date(),
+        },
+      ]);
+    }
   };
 
   const formatData = (data: any) => {
@@ -252,10 +284,17 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Escribe tu consulta sobre inventario..."
+              placeholder="Escribe o habla tu consulta sobre inventario..."
               className="flex-1 px-3 py-2 border border-input rounded-md bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring disabled:opacity-50"
               disabled={isLoading}
             />
+
+            {/* Voice Input Button */}
+            <VoiceInput
+              onTranscript={handleVoiceTranscript}
+              disabled={isLoading}
+            />
+
             <Button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
@@ -270,8 +309,12 @@ export function ChatBot({ className, onHistoryToggle, showHistory = false }: Cha
             </Button>
           </form>
 
-          <div className="mt-2 text-xs text-muted-foreground">
-            Ejemplo: "muéstrame las categorías" o "productos con stock bajo"
+          <div className="mt-2 mb-2 text-xs text-muted-foreground flex items-center justify-between">
+            <span>Ejemplo: "muéstrame las categorías" o "productos con stock bajo"</span>
+            <div className="flex items-center gap-1">
+              <MicIcon className="h-3 w-3" />
+              <span>Habla o presiona Enter</span>
+            </div>
           </div>
         </div>
       </CardContent>

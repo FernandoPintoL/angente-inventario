@@ -8,6 +8,7 @@ use App\Services\AgenteInventarioService;
 use App\Services\ReportExportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class AgenteInventarioController extends Controller
@@ -85,7 +86,7 @@ class AgenteInventarioController extends Controller
             return response()->json($response);
 
         } catch (\Exception $e) {
-            \Log::error('Error en consulta al agente de inventario', [
+            Log::error('Error en consulta al agente de inventario', [
                 'user_id' => $user->id ?? null,
                 'query' => $query ?? null,
                 'error' => $e->getMessage(),
@@ -190,8 +191,11 @@ class AgenteInventarioController extends Controller
             $data = $request->input('data');
             $columns = $request->input('columns');
 
+            // Aplicar filtros si están presentes
+            $filteredData = $this->applyFilters($data, $request->query());
+
             if ($format === 'pdf') {
-                $content = $this->exportService->exportToPdf($data, $columns, $title);
+                $content = $this->exportService->exportToPdf($filteredData, $columns, $title);
                 $filename = $this->generateFileName($title, 'pdf');
 
                 return response($content, 200, [
@@ -199,7 +203,7 @@ class AgenteInventarioController extends Controller
                     'Content-Disposition' => 'attachment; filename="' . $filename . '"'
                 ]);
             } else {
-                $content = $this->exportService->exportToExcel($data, $columns, $title);
+                $content = $this->exportService->exportToExcel($filteredData, $columns, $title);
                 $filename = $this->generateFileName($title, 'xlsx');
 
                 return response($content, 200, [
@@ -209,7 +213,7 @@ class AgenteInventarioController extends Controller
             }
 
         } catch (\Exception $e) {
-            \Log::error('Error exportando reporte', [
+            Log::error('Error exportando reporte', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
@@ -219,6 +223,48 @@ class AgenteInventarioController extends Controller
                 'error' => config('app.debug') ? $e->getMessage() : 'Error interno del servidor'
             ], 500);
         }
+    }
+
+    private function applyFilters(array $data, array $filters): array
+    {
+        $filteredData = $data;
+
+        // Aplicar filtro de búsqueda
+        if (isset($filters['search']) && !empty($filters['search'])) {
+            $searchTerm = strtolower($filters['search']);
+            $filteredData = array_filter($filteredData, function ($row) use ($searchTerm) {
+                foreach ($row as $value) {
+                    if ($value && stripos($value, $searchTerm) !== false) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+
+        // Aplicar ordenamiento
+        if (isset($filters['sort_column']) && !empty($filters['sort_column']) &&
+            isset($filters['sort_direction']) && !empty($filters['sort_direction'])) {
+
+            $sortColumn = $filters['sort_column'];
+            $sortDirection = $filters['sort_direction'];
+
+            usort($filteredData, function ($a, $b) use ($sortColumn, $sortDirection) {
+                $aValue = $a[$sortColumn] ?? '';
+                $bValue = $b[$sortColumn] ?? '';
+
+                // Intentar conversión numérica
+                if (is_numeric($aValue) && is_numeric($bValue)) {
+                    $result = $aValue <=> $bValue;
+                } else {
+                    $result = strcasecmp($aValue, $bValue);
+                }
+
+                return $sortDirection === 'desc' ? -$result : $result;
+            });
+        }
+
+        return array_values($filteredData); // Reindexar el array
     }
 
     private function generateFileName(string $title, string $extension): string

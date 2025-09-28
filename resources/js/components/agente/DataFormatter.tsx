@@ -3,12 +3,78 @@ import { ReportTable } from './ReportTable';
 
 interface DataFormatterProps {
   data: any;
+  compact?: boolean; // Para indicar si estamos en modo compacto (chat flotante)
 }
 
-export function DataFormatter({ data }: DataFormatterProps) {
+export function DataFormatter({ data, compact = false }: DataFormatterProps) {
   if (!data) return null;
 
-  // Verificar si es un reporte con datos y columnas para mostrar tabla
+  // Manejar el nuevo formato structured_table del agente inteligente
+  if (data.type === 'structured_table' && data.data && data.columns) {
+    return (
+      <div className="mt-3">
+        <ReportTable
+          title={data.title || 'Reporte'}
+          data={data.data}
+          columns={data.columns}
+          exportEndpoint="/api/agente/export-report"
+          maxHeight={compact ? "200px" : "300px"}
+          className={compact ? "text-xs" : "text-xs"}
+          searchable={!compact || data.data.length > 5} // Deshabilitar búsqueda en modo compacto si hay pocos datos
+        />
+        {data.sql_query && (
+          <div className="mt-2 p-2 bg-muted/30 rounded text-xs font-mono text-muted-foreground">
+            <div className="font-semibold mb-1">Consulta SQL generada:</div>
+            <div className="overflow-x-auto">{data.sql_query}</div>
+            {data.execution_time && (
+              <div className="mt-1 text-right">
+                Tiempo de ejecución: {(data.execution_time * 1000).toFixed(2)}ms
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Manejar raw_data del nuevo agente
+  if (data.type === 'raw_data' && data.data) {
+    // Si es un array de objetos, mostrar como tabla automática
+    if (Array.isArray(data.data) && data.data.length > 0 && typeof data.data[0] === 'object') {
+      const columns = Object.keys(data.data[0]).map(key => ({
+        key,
+        label: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '),
+        sortable: true
+      }));
+
+      return (
+        <div className="mt-3">
+          <ReportTable
+            title="Datos del Agente"
+            data={data.data}
+            columns={columns}
+            exportEndpoint="/api/agente/export-report"
+            maxHeight={compact ? "200px" : "300px"}
+            className={compact ? "text-xs" : "text-xs"}
+            searchable={!compact || data.data.length > 5}
+          />
+          {data.sql_query && (
+            <div className="mt-2 p-2 bg-muted/30 rounded text-xs font-mono text-muted-foreground">
+              <div className="font-semibold mb-1">Consulta SQL generada:</div>
+              <div className="overflow-x-auto">{data.sql_query}</div>
+              {data.execution_time && (
+                <div className="mt-1 text-right">
+                  Tiempo de ejecución: {(data.execution_time * 1000).toFixed(2)}ms
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+  }
+
+  // Verificar si es un reporte con datos y columnas para mostrar tabla (formato legacy)
   if (data.type === 'report' && data.data && data.columns) {
     return (
       <div className="mt-2">
@@ -17,8 +83,9 @@ export function DataFormatter({ data }: DataFormatterProps) {
           data={data.data}
           columns={data.columns}
           exportEndpoint="/api/agente/export-report"
-          maxHeight="300px"
-          className="text-xs"
+          maxHeight={compact ? "200px" : "300px"}
+          className={compact ? "text-xs" : "text-xs"}
+          searchable={!compact || data.data.length > 5} // Deshabilitar búsqueda en modo compacto si hay pocos datos
         />
       </div>
     );
@@ -41,8 +108,9 @@ export function DataFormatter({ data }: DataFormatterProps) {
           data={data.productos}
           columns={columns}
           exportEndpoint="/api/agente/export-report"
-          maxHeight="300px"
-          className="text-xs"
+          maxHeight={compact ? "200px" : "300px"}
+          className={compact ? "text-xs" : "text-xs"}
+          searchable={!compact || data.productos.length > 5}
         />
       </div>
     );
@@ -66,8 +134,9 @@ export function DataFormatter({ data }: DataFormatterProps) {
           data={data.movimientos}
           columns={columns}
           exportEndpoint="/api/agente/export-report"
-          maxHeight="300px"
-          className="text-xs"
+          maxHeight={compact ? "200px" : "300px"}
+          className={compact ? "text-xs" : "text-xs"}
+          searchable={!compact || data.movimientos.length > 5}
         />
       </div>
     );
@@ -90,8 +159,9 @@ export function DataFormatter({ data }: DataFormatterProps) {
           data={data.ventas}
           columns={columns}
           exportEndpoint="/api/agente/export-report"
-          maxHeight="300px"
-          className="text-xs"
+          maxHeight={compact ? "200px" : "300px"}
+          className={compact ? "text-xs" : "text-xs"}
+          searchable={!compact || data.ventas.length > 5}
         />
       </div>
     );
@@ -113,8 +183,9 @@ export function DataFormatter({ data }: DataFormatterProps) {
           data={data}
           columns={columns}
           exportEndpoint="/api/agente/export-report"
-          maxHeight="300px"
-          className="text-xs"
+          maxHeight={compact ? "200px" : "300px"}
+          className={compact ? "text-xs" : "text-xs"}
+          searchable={!compact || data.length > 5}
         />
       </div>
     );
