@@ -106,9 +106,9 @@ export function FloatingChat() {
     }
   ];
 
-  if (!canUseAgent) {
+  /* if (!canUseAgent) {
     return null;
-  }
+  } */
 
   // Chat Trigger Button
   if (!isOpen) {
