@@ -35,8 +35,11 @@ class AgenteInventarioService
                 'payload' => $payload
             ]);
 
-            $response = Http::timeout($this->timeout)
-                ->post("{$this->baseUrl}/api/v1/query", $payload);
+            $httpClient = Http::when($this->timeout > 0, function ($http) {
+                return $http->timeout($this->timeout);
+            });
+
+            $response = $httpClient->post("{$this->baseUrl}/api/v1/query", $payload);
 
             if ($response->successful()) {
                 $data = $response->json();
@@ -149,9 +152,12 @@ class AgenteInventarioService
         $structuredData = $agentData['structured_data'] ?? null;
         $executionTime = $agentData['execution_time'] ?? 0;
 
+        // Determinar si la respuesta debería mostrar datos en formato tabla
+        $shouldShowTable = $this->shouldShowTableFormat($answer, $sqlQuery, $structuredData, $rawData);
+
         // Determinar el tipo de datos para el formatter
         $formattedData = null;
-        if ($structuredData && isset($structuredData['columns']) && isset($structuredData['rows'])) {
+        if ($shouldShowTable && $structuredData && isset($structuredData['columns']) && isset($structuredData['rows'])) {
             // Convertir structured_data a formato para tablas
             $formattedData = [
                 'type' => 'structured_table',
@@ -162,8 +168,8 @@ class AgenteInventarioService
                 'sql_query' => $sqlQuery,
                 'execution_time' => $executionTime
             ];
-        } elseif (!empty($rawData)) {
-            // Usar raw_data si no hay structured_data
+        } elseif ($shouldShowTable && !empty($rawData) && is_array($rawData) && count($rawData) > 0) {
+            // Solo usar raw_data como tabla si tiene sentido mostrarla como tabla
             $formattedData = [
                 'type' => 'raw_data',
                 'data' => $rawData,
@@ -185,6 +191,71 @@ class AgenteInventarioService
                 'agent_version' => '3.0.0'
             ]
         ];
+    }
+
+    /**
+     * Determinar si la respuesta debería mostrar datos en formato tabla
+     */
+    protected function shouldShowTableFormat(string $answer, ?string $sqlQuery, ?array $structuredData, array $rawData): bool
+    {
+        // Frases que indican respuestas literales que NO deben mostrar tablas
+        $literalResponsePatterns = [
+            '/^(sí|no|si|claro|por supuesto|efectivamente|correcto|incorrecto)/i',
+            '/^(el total es|la cantidad es|el precio es|el valor es)/i',
+            '/^(hay \d+|tienes \d+|existen \d+|se encontraron \d+)/i',
+            '/^(la respuesta es|el resultado es|la información es)/i',
+            '/(gracias|de nada|por favor|disculpa|lo siento)/i',
+            '/^(hola|buenos días|buenas tardes|buenas noches)/i',
+            '/(no se encontr|no hay|no existe|no hay datos|sin resultados)/i',
+            '/^(entiendo|comprendo|perfecto|excelente|muy bien)/i'
+        ];
+
+        // Si la respuesta coincide con patrones literales, no mostrar tabla
+        foreach ($literalResponsePatterns as $pattern) {
+            if (preg_match($pattern, $answer)) {
+                return false;
+            }
+        }
+
+        // Si no hay datos estructurados ni consulta SQL, probablemente es respuesta literal
+        if (!$sqlQuery && (!$structuredData || empty($structuredData))) {
+            return false;
+        }
+
+        // Si hay structured_data con columnas y filas, es candidato para tabla
+        if ($structuredData && isset($structuredData['columns']) && isset($structuredData['rows']) && count($structuredData['rows']) > 0) {
+            return true;
+        }
+
+        // Si hay raw_data que es un array de objetos con al menos 2 elementos, considerar tabla
+        if (is_array($rawData) && count($rawData) >= 2 && is_array($rawData[0]) && count($rawData[0]) > 1) {
+            return true;
+        }
+
+        // Palabras clave en la consulta SQL que sugieren datos tabulares
+        if ($sqlQuery) {
+            $sqlLower = strtolower($sqlQuery);
+            $tableKeywords = ['select', 'from', 'where', 'join', 'group by', 'order by'];
+            $hasTableKeywords = false;
+            foreach ($tableKeywords as $keyword) {
+                if (strpos($sqlLower, $keyword) !== false) {
+                    $hasTableKeywords = true;
+                    break;
+                }
+            }
+
+            // Si tiene keywords de SQL pero la respuesta parece literal, no mostrar tabla
+            if ($hasTableKeywords) {
+                // Verificar si la respuesta es muy corta o parece ser un conteo/suma simple
+                if (strlen(trim($answer)) < 50 && preg_match('/^\d+(\.\d+)?( unidades?| productos?| registros?| items?)?$/', trim($answer))) {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        // Por defecto, no mostrar tabla
+        return false;
     }
 
     /**
@@ -377,10 +448,11 @@ class AgenteInventarioService
                 'response' => "📋 **Productos con Stock Bajo**\n\nEncontré {$productosStockBajo->count()} productos con stock bajo.",
                 'confidence' => 0.8,
                 'intent' => 'consultar_stock_bajo',
-                'data' => [
+                'data' => $productosStockBajo->count() > 0 ? [
+                    'type' => 'productos_stock',
                     'productos' => $productosStockBajo->toArray(),
                     'total_count' => $productosStockBajo->count()
-                ],
+                ] : null, // No mostrar tabla si no hay datos
                 'success' => true
             ];
         }
@@ -397,14 +469,7 @@ class AgenteInventarioService
                     'response' => "📦 **Stock del Producto {$sku}**\n\n{$producto->nombre}: {$stockTotal} unidades disponibles",
                     'confidence' => 0.9,
                     'intent' => 'consultar_stock_producto',
-                    'data' => [
-                        'producto' => [
-                            'sku' => $producto->sku,
-                            'nombre' => $producto->nombre,
-                            'stock_total' => $stockTotal,
-                            'precio_venta' => $producto->precioVenta?->precio ?? 0
-                        ]
-                    ],
+                    'data' => null, // Respuesta simple, no necesita tabla
                     'success' => true
                 ];
             } else {
@@ -412,10 +477,7 @@ class AgenteInventarioService
                     'response' => "❌ No encontré ningún producto con el SKU '{$sku}'. ¿Podrías verificar el SKU?",
                     'confidence' => 0.3,
                     'intent' => 'producto_no_encontrado',
-                    'data' => [
-                        'searched_sku' => $sku,
-                        'suggestions' => ['Verificar el SKU', 'Buscar por nombre del producto']
-                    ],
+                    'data' => null, // Respuesta de error, no necesita tabla
                     'success' => false
                 ];
             }
@@ -496,10 +558,7 @@ class AgenteInventarioService
                 'response' => "🤖 **Agente de Inventario (Modo Local)**\n\n**Comandos disponibles:**\n• Consultar stock bajo: 'productos con stock bajo'\n• Consultar producto: 'stock de [SKU]'\n• Productos próximos a vencer: 'productos próximos a vencer' o 'productos que vencen en 10 días'\n• Esta funcionalidad limitada está disponible mientras el agente principal no esté conectado.",
                 'confidence' => 1.0,
                 'intent' => 'ayuda_local',
-                'data' => [
-                    'available_features' => ['consultar_stock_bajo', 'consultar_producto_sku', 'consultar_vencimientos'],
-                    'mode' => 'local_fallback'
-                ],
+                'data' => null, // Respuesta informativa, no necesita tabla
                 'success' => true
             ];
         }
@@ -509,11 +568,7 @@ class AgenteInventarioService
             'response' => 'Lo siento, el agente de inventario no está disponible. Funcionalidad limitada activa. Usa "ayuda" para ver comandos disponibles.',
             'confidence' => 0.1,
             'intent' => 'consulta_desconocida',
-            'data' => [
-                'error' => 'Agent service unavailable',
-                'fallback_mode' => true,
-                'suggestions' => ['ayuda', 'stock bajo', 'stock de [SKU]']
-            ],
+            'data' => null, // Respuesta de error, no necesita tabla
             'success' => false
         ];
     }

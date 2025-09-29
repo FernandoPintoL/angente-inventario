@@ -9,8 +9,13 @@ interface DataFormatterProps {
 export function DataFormatter({ data, compact = false }: DataFormatterProps) {
   if (!data) return null;
 
+  // Función helper para determinar si los datos justifican mostrar una tabla
+  const shouldRenderTable = (tableData: any[], minRows: number = 1) => {
+    return Array.isArray(tableData) && tableData.length >= minRows && tableData.length > 0;
+  };
+
   // Manejar el nuevo formato structured_table del agente inteligente
-  if (data.type === 'structured_table' && data.data && data.columns) {
+  if (data.type === 'structured_table' && data.data && data.columns && shouldRenderTable(data.data)) {
     return (
       <div className="mt-3">
         <ReportTable
@@ -39,8 +44,8 @@ export function DataFormatter({ data, compact = false }: DataFormatterProps) {
 
   // Manejar raw_data del nuevo agente
   if (data.type === 'raw_data' && data.data) {
-    // Si es un array de objetos, mostrar como tabla automática
-    if (Array.isArray(data.data) && data.data.length > 0 && typeof data.data[0] === 'object') {
+    // Si es un array de objetos, mostrar como tabla automática SOLO si tiene suficientes datos
+    if (Array.isArray(data.data) && shouldRenderTable(data.data, 2) && typeof data.data[0] === 'object') {
       const columns = Object.keys(data.data[0]).map(key => ({
         key,
         label: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '),
@@ -92,7 +97,7 @@ export function DataFormatter({ data, compact = false }: DataFormatterProps) {
   }
 
   // Formato especial para productos con stock
-  if (data.type === 'productos_stock' && Array.isArray(data.productos)) {
+  if (data.type === 'productos_stock' && Array.isArray(data.productos) && shouldRenderTable(data.productos)) {
     const columns = [
       { key: 'codigo', label: 'Código', sortable: true },
       { key: 'nombre', label: 'Producto', sortable: true },
@@ -117,7 +122,7 @@ export function DataFormatter({ data, compact = false }: DataFormatterProps) {
   }
 
   // Formato especial para movimientos de inventario
-  if (data.type === 'movimientos' && Array.isArray(data.movimientos)) {
+  if (data.type === 'movimientos' && Array.isArray(data.movimientos) && shouldRenderTable(data.movimientos)) {
     const columns = [
       { key: 'fecha', label: 'Fecha', sortable: true },
       { key: 'tipo_movimiento', label: 'Tipo', sortable: true },
@@ -143,7 +148,7 @@ export function DataFormatter({ data, compact = false }: DataFormatterProps) {
   }
 
   // Formato especial para ventas
-  if (data.type === 'ventas' && Array.isArray(data.ventas)) {
+  if (data.type === 'ventas' && Array.isArray(data.ventas) && shouldRenderTable(data.ventas)) {
     const columns = [
       { key: 'numero', label: 'Número', sortable: true },
       { key: 'fecha_venta', label: 'Fecha', sortable: true },
@@ -167,8 +172,8 @@ export function DataFormatter({ data, compact = false }: DataFormatterProps) {
     );
   }
 
-  // Array de objetos - mostrar como tabla simple
-  if (Array.isArray(data) && data.length > 0 && typeof data[0] === 'object') {
+  // Array de objetos - mostrar como tabla simple SOLO si tiene suficientes datos
+  if (Array.isArray(data) && shouldRenderTable(data, 2) && typeof data[0] === 'object') {
     // Generar columnas automáticamente basado en las claves del primer objeto
     const columns = Object.keys(data[0]).map(key => ({
       key,
