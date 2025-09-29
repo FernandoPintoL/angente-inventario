@@ -220,7 +220,7 @@ export function ReportTable({
                 )}
                 <span className="hidden sm:inline">PDF</span>
               </Button>
-              <Button
+              {/* <Button
                 variant="outline"
                 size="sm"
                 onClick={() => handleExport('excel')}
@@ -233,7 +233,7 @@ export function ReportTable({
                   <FileSpreadsheetIcon className="size-3" />
                 )}
                 <span className="hidden sm:inline">Excel</span>
-              </Button>
+              </Button> */}
             </div>
           )}
         </div>
