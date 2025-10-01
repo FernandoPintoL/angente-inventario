@@ -20,17 +20,15 @@ class DashboardController extends Controller
         $periodo = $request->get('periodo', 'mes_actual');
 
         $metricas = $this->dashboardService->getMainMetrics($periodo);
-        $graficoVentas = $this->dashboardService->getGraficoVentas($periodo);
-        $productosMasVendidos = $this->dashboardService->getProductosMasVendidos(10, $periodo);
+        $graficoCompras = $this->dashboardService->getGraficoCompras('diario', 30);
+        $productosMasComprados = $this->dashboardService->getProductosMasComprados(10);
         $alertasStock = $this->dashboardService->getAlertasStock();
-        $ventasPorCanal = $this->dashboardService->getVentasPorCanal($periodo);
 
         return Inertia::render('dashboard', [
             'metricas' => $metricas,
-            'graficoVentas' => $graficoVentas,
-            'productosMasVendidos' => $productosMasVendidos,
+            'graficoCompras' => $graficoCompras,
+            'productosMasComprados' => $productosMasComprados,
             'alertasStock' => $alertasStock,
-            'ventasPorCanal' => $ventasPorCanal,
             'periodo' => $periodo,
         ]);
     }
@@ -53,11 +51,11 @@ class DashboardController extends Controller
      */
     public function graficos(Request $request)
     {
-        $tipo = $request->get('tipo', 'ventas');
+        $tipo = $request->get('tipo', 'compras');
         $dias = $request->get('dias', 30);
 
         $data = match ($tipo) {
-            'ventas' => $this->dashboardService->getGraficoVentas('diario', $dias),
+            'compras' => $this->dashboardService->getGraficoCompras('diario', $dias),
             default => []
         };
 
@@ -68,15 +66,15 @@ class DashboardController extends Controller
     }
 
     /**
-     * Obtener productos más vendidos via API
+     * Obtener productos más comprados via API
      */
-    public function productosMasVendidos(Request $request)
+    public function productosMasComprados(Request $request)
     {
         $limite = $request->get('limite', 10);
 
         return response()->json([
             'success' => true,
-            'data' => $this->dashboardService->getProductosMasVendidos($limite),
+            'data' => $this->dashboardService->getProductosMasComprados($limite),
         ]);
     }
 
@@ -88,19 +86,6 @@ class DashboardController extends Controller
         return response()->json([
             'success' => true,
             'data' => $this->dashboardService->getAlertasStock(),
-        ]);
-    }
-
-    /**
-     * Obtener ventas por canal via API
-     */
-    public function ventasPorCanal(Request $request)
-    {
-        $periodo = $request->get('periodo', 'mes_actual');
-
-        return response()->json([
-            'success' => true,
-            'data' => $this->dashboardService->getVentasPorCanal($periodo),
         ]);
     }
 }

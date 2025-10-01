@@ -51,7 +51,7 @@ class CoreCatalogSeeder extends Seeder
         DB::table('tipo_operacion_caja')->upsert($tiposOpCaja, ['codigo'], ['nombre']); */
 
         // Estados de pedido
-        $estadosPedido = [
+        /* $estadosPedido = [
             ['codigo' => 'SOLICITADO', 'nombre' => 'Solicitado'],
             ['codigo' => 'CONFIRMADO', 'nombre' => 'Confirmado'],
             ['codigo' => 'PREPARANDO', 'nombre' => 'Preparando'],
@@ -60,7 +60,7 @@ class CoreCatalogSeeder extends Seeder
             ['codigo' => 'ENTREGADO', 'nombre' => 'Entregado'],
             ['codigo' => 'CANCELADO', 'nombre' => 'Cancelado'],
         ];
-        DB::table('estados_pedido')->upsert($estadosPedido, ['codigo'], ['nombre']);
+        DB::table('estados_pedido')->upsert($estadosPedido, ['codigo'], ['nombre']); */
 
         // almacenes para DEPOSITO Y SALA DE VENTAS
         $almacenes = [
@@ -70,11 +70,11 @@ class CoreCatalogSeeder extends Seeder
         DB::table('almacenes')->upsert($almacenes, ['nombre'], ['activo', 'direccion']);
 
         // marcas para COCA COLA y PEPSI
-        $marcas = [
+        /* $marcas = [
             ['nombre' => 'Coca Cola', 'activo' => true],
             ['nombre' => 'Pepsi', 'activo' => true],
         ];
-        DB::table('marcas')->upsert($marcas, ['nombre'], ['activo']);
+        DB::table('marcas')->upsert($marcas, ['nombre'], ['activo']); */
 
         // categorias para CERVEZAS, GASEOSA, AGUAS
         $categorias = [

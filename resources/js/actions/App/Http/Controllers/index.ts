@@ -20,21 +20,14 @@ import ConfiguracionGlobalController from './ConfiguracionGlobalController'
 import UnidadMedidaController from './UnidadMedidaController'
 import TipoPrecioController from './TipoPrecioController'
 import MonedaController from './MonedaController'
-import TipoPagoController from './TipoPagoController'
 import UserController from './UserController'
 import RoleController from './RoleController'
 import PermissionController from './PermissionController'
-import EmpleadoController from './EmpleadoController'
 import CuentaPorPagarController from './CuentaPorPagarController'
 import PagoController from './PagoController'
 import LoteVencimientoController from './LoteVencimientoController'
 import ReporteComprasController from './ReporteComprasController'
 import DetalleCompraController from './DetalleCompraController'
-import DetalleVentaController from './DetalleVentaController'
-import ProformaController from './ProformaController'
-import CajaController from './CajaController'
-import VehiculoController from './VehiculoController'
-import Web from './Web'
 import ReportePreciosController from './ReportePreciosController'
 import ReporteInventarioController from './ReporteInventarioController'
 import AgenteController from './AgenteController'
@@ -63,21 +56,14 @@ ConfiguracionGlobalController,
 UnidadMedidaController,
 TipoPrecioController,
 MonedaController,
-TipoPagoController,
 UserController,
 RoleController,
 PermissionController,
-EmpleadoController,
 CuentaPorPagarController,
 PagoController,
 LoteVencimientoController,
 ReporteComprasController,
 DetalleCompraController,
-DetalleVentaController,
-ProformaController,
-CajaController,
-VehiculoController,
-Web,
 ReportePreciosController,
 ReporteInventarioController,
 AgenteController,

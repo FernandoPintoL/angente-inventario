@@ -4,12 +4,8 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 import {
-    DollarSign,
     ShoppingCart,
     Package,
-    Wallet,
-    Users,
-    FileText,
     Activity
 } from 'lucide-react';
 
@@ -22,12 +18,6 @@ import { PeriodSelector } from '@/components/dashboard/period-selector';
 
 interface DashboardProps {
     metricas: {
-        ventas: {
-            total: number;
-            cantidad: number;
-            promedio: number;
-            cambio_porcentual: number;
-        };
         compras: {
             total: number;
             cantidad: number;
@@ -40,26 +30,8 @@ interface DashboardProps {
             valor_inventario: number;
             productos_sin_stock: number;
         };
-        caja: {
-            ingresos: number;
-            egresos: number;
-            saldo: number;
-            total_movimientos: number;
-        };
-        clientes: {
-            total: number;
-            nuevos: number;
-            activos: number;
-            con_credito: number;
-        };
-        proformas: {
-            total: number;
-            aprobadas: number;
-            pendientes: number;
-            tasa_aprobacion: number;
-        };
     };
-    graficoVentas: {
+    graficoCompras: {
         labels: string[];
         datasets: Array<{
             label: string;
@@ -70,10 +42,10 @@ interface DashboardProps {
             yAxisID?: string;
         }>;
     };
-    productosMasVendidos: Array<{
+    productosMasComprados: Array<{
         nombre: string;
-        total_vendido: number;
-        ingresos_total: number;
+        total_comprado: number;
+        gasto_total: number;
     }>;
     alertasStock: {
         stock_bajo: number;
@@ -85,10 +57,6 @@ interface DashboardProps {
             stock_minimo: number;
         }>;
     };
-    ventasPorCanal: Record<string, {
-        total: number;
-        monto: number;
-    }>;
     periodo: string;
 }
 
@@ -101,10 +69,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Dashboard({
     metricas,
-    graficoVentas,
-    productosMasVendidos,
+    graficoCompras,
+    productosMasComprados,
     alertasStock,
-    ventasPorCanal,
     periodo: initialPeriodo,
 }: DashboardProps) {
     const [periodo, setPeriodo] = useState(initialPeriodo || 'mes_actual');
@@ -112,24 +79,19 @@ export default function Dashboard({
 
     // Valores por defecto para evitar errores de undefined
     const defaultMetricas = {
-        ventas: { total: 0, cantidad: 0, promedio: 0, cambio_porcentual: 0 },
         compras: { total: 0, cantidad: 0, promedio: 0, cambio_porcentual: 0 },
         inventario: { total_productos: 0, stock_total: 0, valor_inventario: 0, productos_sin_stock: 0 },
-        caja: { ingresos: 0, egresos: 0, saldo: 0, total_movimientos: 0 },
-        clientes: { total: 0, nuevos: 0, activos: 0, con_credito: 0 },
-        proformas: { total: 0, aprobadas: 0, pendientes: 0, tasa_aprobacion: 0 },
     };
 
-    const defaultGraficoVentas = {
+    const defaultGraficoCompras = {
         labels: [],
         datasets: [],
     };
 
     const safeMetricas = metricas || defaultMetricas;
-    const safeGraficoVentas = graficoVentas || defaultGraficoVentas;
-    const safeProductosMasVendidos = productosMasVendidos || [];
+    const safeGraficoCompras = graficoCompras || defaultGraficoCompras;
+    const safeProductosMasComprados = productosMasComprados || [];
     const safeAlertasStock = alertasStock || { stock_bajo: 0, stock_critico: 0, productos_afectados: [] };
-    const safeVentasPorCanal = ventasPorCanal || {};
 
     const handlePeriodChange = (newPeriod: string) => {
         setPeriodo(newPeriod);
@@ -139,22 +101,6 @@ export default function Dashboard({
             preserveScroll: true,
             onFinish: () => setLoading(false),
         });
-    };
-
-    // Preparar datos para el gráfico de ventas por canal
-    const ventasPorCanalData = {
-        labels: Object.keys(safeVentasPorCanal),
-        datasets: [{
-            data: Object.values(safeVentasPorCanal).map(canal => canal.monto),
-            backgroundColor: [
-                'rgba(59, 130, 246, 0.8)',
-                'rgba(16, 185, 129, 0.8)',
-                'rgba(245, 158, 11, 0.8)',
-                'rgba(239, 68, 68, 0.8)',
-                'rgba(139, 92, 246, 0.8)',
-            ],
-            borderWidth: 0,
-        }],
     };
 
     return (
@@ -179,15 +125,7 @@ export default function Dashboard({
                 </div>
 
                 {/* Métricas principales */}
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    <MetricCard
-                        title="Ventas Totales"
-                        value={safeMetricas.ventas.total}
-                        subtitle={`${safeMetricas.ventas.cantidad} ventas`}
-                        change={safeMetricas.ventas.cambio_porcentual}
-                        icon={DollarSign}
-                        loading={loading}
-                    />
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <MetricCard
                         title="Compras Totales"
                         value={safeMetricas.compras.total}
@@ -204,35 +142,6 @@ export default function Dashboard({
                         loading={loading}
                     />
                     <MetricCard
-                        title="Saldo en Caja"
-                        value={safeMetricas.caja.saldo}
-                        subtitle={`${safeMetricas.caja.total_movimientos} movimientos`}
-                        change={
-                            safeMetricas.caja.ingresos === 0 && safeMetricas.caja.egresos === 0 ? 0 :
-                                safeMetricas.caja.ingresos > safeMetricas.caja.egresos ?
-                                    safeMetricas.caja.ingresos > 0 ? ((safeMetricas.caja.ingresos - safeMetricas.caja.egresos) / safeMetricas.caja.ingresos) * 100 : 0 :
-                                    safeMetricas.caja.egresos > 0 ? -((safeMetricas.caja.egresos - safeMetricas.caja.ingresos) / safeMetricas.caja.egresos) * 100 : 0
-                        }
-                        icon={Wallet}
-                        loading={loading}
-                    />
-                </div>                {/* Métricas secundarias */}
-                <div className="grid gap-4 md:grid-cols-3">
-                    <MetricCard
-                        title="Clientes Activos"
-                        value={safeMetricas.clientes.activos}
-                        subtitle={`${safeMetricas.clientes.nuevos} nuevos`}
-                        icon={Users}
-                        loading={loading}
-                    />
-                    <MetricCard
-                        title="Proformas Aprobadas"
-                        value={`${safeMetricas.proformas.tasa_aprobacion}%`}
-                        subtitle={`${safeMetricas.proformas.aprobadas}/${safeMetricas.proformas.total} total`}
-                        icon={FileText}
-                        loading={loading}
-                    />
-                    <MetricCard
                         title="Stock Total"
                         value={safeMetricas.inventario.stock_total}
                         subtitle={`${safeMetricas.inventario.productos_sin_stock} sin stock`}
@@ -243,28 +152,20 @@ export default function Dashboard({
 
                 {/* Gráficos y datos detallados */}
                 <div className="grid gap-6 lg:grid-cols-2">
-                    {/* Gráfico de ventas */}
+                    {/* Gráfico de compras */}
                     <ChartWrapper
-                        title="Evolución de Ventas"
+                        title="Evolución de Compras"
                         type="line"
-                        data={safeGraficoVentas}
+                        data={safeGraficoCompras}
                         loading={loading}
                         className="lg:col-span-2"
                     />
 
-                    {/* Ventas por canal */}
-                    <ChartWrapper
-                        title="Ventas por Canal"
-                        type="doughnut"
-                        data={ventasPorCanalData}
-                        loading={loading}
-                        height={250}
-                    />
-
-                    {/* Productos más vendidos */}
+                    {/* Productos más comprados */}
                     <ProductosMasVendidos
-                        productos={safeProductosMasVendidos}
+                        productos={safeProductosMasComprados}
                         loading={loading}
+                        title="Productos Más Comprados"
                     />
                 </div>
 

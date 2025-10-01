@@ -137,7 +137,7 @@ storeApi.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-export const showApi = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const showApi = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: showApi.url(args, options),
     method: 'get',
 })
@@ -152,7 +152,7 @@ showApi.definition = {
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-showApi.url = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+showApi.url = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { localidad: args }
     }
@@ -185,7 +185,7 @@ showApi.url = (args: { localidad: number | { id: number } } | [localidad: number
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-showApi.get = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+showApi.get = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: showApi.url(args, options),
     method: 'get',
 })
@@ -194,7 +194,7 @@ showApi.get = (args: { localidad: number | { id: number } } | [localidad: number
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-showApi.head = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+showApi.head = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: showApi.url(args, options),
     method: 'head',
 })
@@ -204,7 +204,7 @@ showApi.head = (args: { localidad: number | { id: number } } | [localidad: numbe
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-    const showApiForm = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    const showApiForm = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
         action: showApi.url(args, options),
         method: 'get',
     })
@@ -214,7 +214,7 @@ showApi.head = (args: { localidad: number | { id: number } } | [localidad: numbe
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-        showApiForm.get = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        showApiForm.get = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: showApi.url(args, options),
             method: 'get',
         })
@@ -223,7 +223,7 @@ showApi.head = (args: { localidad: number | { id: number } } | [localidad: numbe
  * @see app/Http/Controllers/LocalidadController.php:42
  * @route '/api/localidades/{localidad}'
  */
-        showApiForm.head = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        showApiForm.head = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: showApi.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
@@ -239,7 +239,7 @@ showApi.head = (args: { localidad: number | { id: number } } | [localidad: numbe
  * @see app/Http/Controllers/LocalidadController.php:76
  * @route '/api/localidades/{localidad}'
  */
-export const updateApi = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const updateApi = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateApi.url(args, options),
     method: 'put',
 })
@@ -254,7 +254,7 @@ updateApi.definition = {
  * @see app/Http/Controllers/LocalidadController.php:76
  * @route '/api/localidades/{localidad}'
  */
-updateApi.url = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updateApi.url = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { localidad: args }
     }
@@ -287,7 +287,7 @@ updateApi.url = (args: { localidad: number | { id: number } } | [localidad: numb
  * @see app/Http/Controllers/LocalidadController.php:76
  * @route '/api/localidades/{localidad}'
  */
-updateApi.put = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+updateApi.put = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateApi.url(args, options),
     method: 'put',
 })
@@ -297,7 +297,7 @@ updateApi.put = (args: { localidad: number | { id: number } } | [localidad: numb
  * @see app/Http/Controllers/LocalidadController.php:76
  * @route '/api/localidades/{localidad}'
  */
-    const updateApiForm = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const updateApiForm = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: updateApi.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PUT',
@@ -312,7 +312,7 @@ updateApi.put = (args: { localidad: number | { id: number } } | [localidad: numb
  * @see app/Http/Controllers/LocalidadController.php:76
  * @route '/api/localidades/{localidad}'
  */
-        updateApiForm.put = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        updateApiForm.put = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: updateApi.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PUT',
@@ -328,7 +328,7 @@ updateApi.put = (args: { localidad: number | { id: number } } | [localidad: numb
  * @see app/Http/Controllers/LocalidadController.php:99
  * @route '/api/localidades/{localidad}'
  */
-export const destroyApi = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroyApi = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyApi.url(args, options),
     method: 'delete',
 })
@@ -343,7 +343,7 @@ destroyApi.definition = {
  * @see app/Http/Controllers/LocalidadController.php:99
  * @route '/api/localidades/{localidad}'
  */
-destroyApi.url = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroyApi.url = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { localidad: args }
     }
@@ -376,7 +376,7 @@ destroyApi.url = (args: { localidad: number | { id: number } } | [localidad: num
  * @see app/Http/Controllers/LocalidadController.php:99
  * @route '/api/localidades/{localidad}'
  */
-destroyApi.delete = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroyApi.delete = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyApi.url(args, options),
     method: 'delete',
 })
@@ -386,7 +386,7 @@ destroyApi.delete = (args: { localidad: number | { id: number } } | [localidad: 
  * @see app/Http/Controllers/LocalidadController.php:99
  * @route '/api/localidades/{localidad}'
  */
-    const destroyApiForm = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyApiForm = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroyApi.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -401,7 +401,7 @@ destroyApi.delete = (args: { localidad: number | { id: number } } | [localidad: 
  * @see app/Http/Controllers/LocalidadController.php:99
  * @route '/api/localidades/{localidad}'
  */
-        destroyApiForm.delete = (args: { localidad: number | { id: number } } | [localidad: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyApiForm.delete = (args: { localidad: string | number | { id: string | number } } | [localidad: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroyApi.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',
@@ -412,680 +412,6 @@ destroyApi.delete = (args: { localidad: number | { id: number } } | [localidad: 
         })
     
     destroyApi.form = destroyApiForm
-/**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index.url(options),
-    method: 'get',
-})
-
-index.definition = {
-    methods: ["get","head"],
-    url: '/localidades',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-index.url = (options?: RouteQueryOptions) => {
-    return index.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index.url(options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: index.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-    const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: index.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-        indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: index.url(options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\LocalidadController::index
- * @see app/Http/Controllers/LocalidadController.php:118
- * @route '/localidades'
- */
-        indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: index.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    index.form = indexForm
-/**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: create.url(options),
-    method: 'get',
-})
-
-create.definition = {
-    methods: ["get","head"],
-    url: '/localidades/create',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-create.url = (options?: RouteQueryOptions) => {
-    return create.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: create.url(options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: create.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-    const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: create.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-        createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: create.url(options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\LocalidadController::create
- * @see app/Http/Controllers/LocalidadController.php:133
- * @route '/localidades/create'
- */
-        createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: create.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    create.form = createForm
-/**
-* @see \App\Http\Controllers\LocalidadController::store
- * @see app/Http/Controllers/LocalidadController.php:140
- * @route '/localidades'
- */
-export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
-    method: 'post',
-})
-
-store.definition = {
-    methods: ["post"],
-    url: '/localidades',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::store
- * @see app/Http/Controllers/LocalidadController.php:140
- * @route '/localidades'
- */
-store.url = (options?: RouteQueryOptions) => {
-    return store.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::store
- * @see app/Http/Controllers/LocalidadController.php:140
- * @route '/localidades'
- */
-store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
-    method: 'post',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::store
- * @see app/Http/Controllers/LocalidadController.php:140
- * @route '/localidades'
- */
-    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: store.url(options),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::store
- * @see app/Http/Controllers/LocalidadController.php:140
- * @route '/localidades'
- */
-        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: store.url(options),
-            method: 'post',
-        })
-    
-    store.form = storeForm
-/**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-export const show = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show.url(args, options),
-    method: 'get',
-})
-
-show.definition = {
-    methods: ["get","head"],
-    url: '/localidades/{localidade}',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-show.url = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { localidade: args }
-    }
-
-    
-    if (Array.isArray(args)) {
-        args = {
-                    localidade: args[0],
-                }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-                        localidade: args.localidade,
-                }
-
-    return show.definition.url
-            .replace('{localidade}', parsedArgs.localidade.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-show.get = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show.url(args, options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-show.head = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: show.url(args, options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-    const showForm = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: show.url(args, options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-        showForm.get = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: show.url(args, options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\LocalidadController::show
- * @see app/Http/Controllers/LocalidadController.php:154
- * @route '/localidades/{localidade}'
- */
-        showForm.head = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: show.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    show.form = showForm
-/**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-export const edit = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: edit.url(args, options),
-    method: 'get',
-})
-
-edit.definition = {
-    methods: ["get","head"],
-    url: '/localidades/{localidade}/edit',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-edit.url = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { localidade: args }
-    }
-
-    
-    if (Array.isArray(args)) {
-        args = {
-                    localidade: args[0],
-                }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-                        localidade: args.localidade,
-                }
-
-    return edit.definition.url
-            .replace('{localidade}', parsedArgs.localidade.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-edit.get = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: edit.url(args, options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-edit.head = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: edit.url(args, options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-    const editForm = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: edit.url(args, options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-        editForm.get = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: edit.url(args, options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\LocalidadController::edit
- * @see app/Http/Controllers/LocalidadController.php:161
- * @route '/localidades/{localidade}/edit'
- */
-        editForm.head = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: edit.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    edit.form = editForm
-/**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-export const update = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
-    method: 'put',
-})
-
-update.definition = {
-    methods: ["put","patch"],
-    url: '/localidades/{localidade}',
-} satisfies RouteDefinition<["put","patch"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-update.url = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { localidade: args }
-    }
-
-    
-    if (Array.isArray(args)) {
-        args = {
-                    localidade: args[0],
-                }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-                        localidade: args.localidade,
-                }
-
-    return update.definition.url
-            .replace('{localidade}', parsedArgs.localidade.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-update.put = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: update.url(args, options),
-    method: 'put',
-})
-/**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-update.patch = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
-    url: update.url(args, options),
-    method: 'patch',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-    const updateForm = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: update.url(args, {
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'PUT',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-        updateForm.put = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: update.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'PUT',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-            /**
-* @see \App\Http\Controllers\LocalidadController::update
- * @see app/Http/Controllers/LocalidadController.php:168
- * @route '/localidades/{localidade}'
- */
-        updateForm.patch = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: update.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'PATCH',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    update.form = updateForm
-/**
-* @see \App\Http\Controllers\LocalidadController::destroy
- * @see app/Http/Controllers/LocalidadController.php:181
- * @route '/localidades/{localidade}'
- */
-export const destroy = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(args, options),
-    method: 'delete',
-})
-
-destroy.definition = {
-    methods: ["delete"],
-    url: '/localidades/{localidade}',
-} satisfies RouteDefinition<["delete"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::destroy
- * @see app/Http/Controllers/LocalidadController.php:181
- * @route '/localidades/{localidade}'
- */
-destroy.url = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { localidade: args }
-    }
-
-    
-    if (Array.isArray(args)) {
-        args = {
-                    localidade: args[0],
-                }
-    }
-
-    args = applyUrlDefaults(args)
-
-    const parsedArgs = {
-                        localidade: args.localidade,
-                }
-
-    return destroy.definition.url
-            .replace('{localidade}', parsedArgs.localidade.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::destroy
- * @see app/Http/Controllers/LocalidadController.php:181
- * @route '/localidades/{localidade}'
- */
-destroy.delete = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(args, options),
-    method: 'delete',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::destroy
- * @see app/Http/Controllers/LocalidadController.php:181
- * @route '/localidades/{localidade}'
- */
-    const destroyForm = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: destroy.url(args, {
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'DELETE',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::destroy
- * @see app/Http/Controllers/LocalidadController.php:181
- * @route '/localidades/{localidade}'
- */
-        destroyForm.delete = (args: { localidade: string | number } | [localidade: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: destroy.url(args, {
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'DELETE',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    destroy.form = destroyForm
-/**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-export const getActiveLocalidades = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: getActiveLocalidades.url(options),
-    method: 'get',
-})
-
-getActiveLocalidades.definition = {
-    methods: ["get","head"],
-    url: '/localidades/api/active',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-getActiveLocalidades.url = (options?: RouteQueryOptions) => {
-    return getActiveLocalidades.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-getActiveLocalidades.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: getActiveLocalidades.url(options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-getActiveLocalidades.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: getActiveLocalidades.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-    const getActiveLocalidadesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: getActiveLocalidades.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-        getActiveLocalidadesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: getActiveLocalidades.url(options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\LocalidadController::getActiveLocalidades
- * @see app/Http/Controllers/LocalidadController.php:27
- * @route '/localidades/api/active'
- */
-        getActiveLocalidadesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: getActiveLocalidades.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    getActiveLocalidades.form = getActiveLocalidadesForm
-const LocalidadController = { indexApi, storeApi, showApi, updateApi, destroyApi, index, create, store, show, edit, update, destroy, getActiveLocalidades }
+const LocalidadController = { indexApi, storeApi, showApi, updateApi, destroyApi }
 
 export default LocalidadController

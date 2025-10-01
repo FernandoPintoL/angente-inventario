@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
 export const show = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ show.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
 show.url = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -43,8 +43,8 @@ show.url = (args: { detalle: string | number } | [detalle: string | number ] | s
 }
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
 show.get = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -52,8 +52,8 @@ show.get = (args: { detalle: string | number } | [detalle: string | number ] | s
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
 show.head = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -62,8 +62,8 @@ show.head = (args: { detalle: string | number } | [detalle: string | number ] | 
 })
 
     /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
     const showForm = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -72,8 +72,8 @@ show.head = (args: { detalle: string | number } | [detalle: string | number ] | 
     })
 
             /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
         showForm.get = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -81,8 +81,8 @@ show.head = (args: { detalle: string | number } | [detalle: string | number ] | 
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\DetalleVentaController::show
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::show
+ * @see app/Http/Controllers/DetalleCompraController.php:29
  * @route '/detalles/{detalle}'
  */
         showForm.head = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -97,8 +97,8 @@ show.head = (args: { detalle: string | number } | [detalle: string | number ] | 
     
     show.form = showForm
 /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
 export const edit = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,8 +112,8 @@ edit.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
 edit.url = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -140,8 +140,8 @@ edit.url = (args: { detalle: string | number } | [detalle: string | number ] | s
 }
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
 edit.get = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -149,8 +149,8 @@ edit.get = (args: { detalle: string | number } | [detalle: string | number ] | s
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
 edit.head = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -159,8 +159,8 @@ edit.head = (args: { detalle: string | number } | [detalle: string | number ] | 
 })
 
     /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
     const editForm = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -169,8 +169,8 @@ edit.head = (args: { detalle: string | number } | [detalle: string | number ] | 
     })
 
             /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
         editForm.get = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -178,8 +178,8 @@ edit.head = (args: { detalle: string | number } | [detalle: string | number ] | 
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\DetalleVentaController::edit
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::edit
+ * @see app/Http/Controllers/DetalleCompraController.php:0
  * @route '/detalles/{detalle}/edit'
  */
         editForm.head = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -194,8 +194,8 @@ edit.head = (args: { detalle: string | number } | [detalle: string | number ] | 
     
     edit.form = editForm
 /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
 export const update = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -209,8 +209,8 @@ update.definition = {
 } satisfies RouteDefinition<["put","patch"]>
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
 update.url = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -237,8 +237,8 @@ update.url = (args: { detalle: string | number } | [detalle: string | number ] |
 }
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
 update.put = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -246,8 +246,8 @@ update.put = (args: { detalle: string | number } | [detalle: string | number ] |
     method: 'put',
 })
 /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
 update.patch = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -256,8 +256,8 @@ update.patch = (args: { detalle: string | number } | [detalle: string | number ]
 })
 
     /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
     const updateForm = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -271,8 +271,8 @@ update.patch = (args: { detalle: string | number } | [detalle: string | number ]
     })
 
             /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
         updateForm.put = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -285,8 +285,8 @@ update.patch = (args: { detalle: string | number } | [detalle: string | number ]
             method: 'post',
         })
             /**
-* @see \App\Http\Controllers\DetalleVentaController::update
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::update
+ * @see app/Http/Controllers/DetalleCompraController.php:44
  * @route '/detalles/{detalle}'
  */
         updateForm.patch = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -301,8 +301,8 @@ update.patch = (args: { detalle: string | number } | [detalle: string | number ]
     
     update.form = updateForm
 /**
-* @see \App\Http\Controllers\DetalleVentaController::destroy
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::destroy
+ * @see app/Http/Controllers/DetalleCompraController.php:53
  * @route '/detalles/{detalle}'
  */
 export const destroy = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -316,8 +316,8 @@ destroy.definition = {
 } satisfies RouteDefinition<["delete"]>
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::destroy
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::destroy
+ * @see app/Http/Controllers/DetalleCompraController.php:53
  * @route '/detalles/{detalle}'
  */
 destroy.url = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -344,8 +344,8 @@ destroy.url = (args: { detalle: string | number } | [detalle: string | number ] 
 }
 
 /**
-* @see \App\Http\Controllers\DetalleVentaController::destroy
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::destroy
+ * @see app/Http/Controllers/DetalleCompraController.php:53
  * @route '/detalles/{detalle}'
  */
 destroy.delete = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -354,8 +354,8 @@ destroy.delete = (args: { detalle: string | number } | [detalle: string | number
 })
 
     /**
-* @see \App\Http\Controllers\DetalleVentaController::destroy
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::destroy
+ * @see app/Http/Controllers/DetalleCompraController.php:53
  * @route '/detalles/{detalle}'
  */
     const destroyForm = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -369,8 +369,8 @@ destroy.delete = (args: { detalle: string | number } | [detalle: string | number
     })
 
             /**
-* @see \App\Http\Controllers\DetalleVentaController::destroy
- * @see app/Http/Controllers/DetalleVentaController.php:0
+* @see \App\Http\Controllers\DetalleCompraController::destroy
+ * @see app/Http/Controllers/DetalleCompraController.php:53
  * @route '/detalles/{detalle}'
  */
         destroyForm.delete = (args: { detalle: string | number } | [detalle: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

@@ -137,7 +137,7 @@ storeApi.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-export const showApi = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const showApi = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: showApi.url(args, options),
     method: 'get',
 })
@@ -152,7 +152,7 @@ showApi.definition = {
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-showApi.url = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+showApi.url = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { categoria: args }
     }
@@ -185,7 +185,7 @@ showApi.url = (args: { categoria: number | { id: number } } | [categoria: number
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-showApi.get = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+showApi.get = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: showApi.url(args, options),
     method: 'get',
 })
@@ -194,7 +194,7 @@ showApi.get = (args: { categoria: number | { id: number } } | [categoria: number
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-showApi.head = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+showApi.head = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: showApi.url(args, options),
     method: 'head',
 })
@@ -204,7 +204,7 @@ showApi.head = (args: { categoria: number | { id: number } } | [categoria: numbe
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-    const showApiForm = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    const showApiForm = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
         action: showApi.url(args, options),
         method: 'get',
     })
@@ -214,7 +214,7 @@ showApi.head = (args: { categoria: number | { id: number } } | [categoria: numbe
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-        showApiForm.get = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        showApiForm.get = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: showApi.url(args, options),
             method: 'get',
         })
@@ -223,7 +223,7 @@ showApi.head = (args: { categoria: number | { id: number } } | [categoria: numbe
  * @see app/Http/Controllers/CategoriaClienteController.php:62
  * @route '/api/categorias-cliente/{categoria}'
  */
-        showApiForm.head = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        showApiForm.head = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: showApi.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
@@ -239,7 +239,7 @@ showApi.head = (args: { categoria: number | { id: number } } | [categoria: numbe
  * @see app/Http/Controllers/CategoriaClienteController.php:73
  * @route '/api/categorias-cliente/{categoria}'
  */
-export const updateApi = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const updateApi = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateApi.url(args, options),
     method: 'put',
 })
@@ -254,7 +254,7 @@ updateApi.definition = {
  * @see app/Http/Controllers/CategoriaClienteController.php:73
  * @route '/api/categorias-cliente/{categoria}'
  */
-updateApi.url = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updateApi.url = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { categoria: args }
     }
@@ -287,7 +287,7 @@ updateApi.url = (args: { categoria: number | { id: number } } | [categoria: numb
  * @see app/Http/Controllers/CategoriaClienteController.php:73
  * @route '/api/categorias-cliente/{categoria}'
  */
-updateApi.put = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+updateApi.put = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateApi.url(args, options),
     method: 'put',
 })
@@ -297,7 +297,7 @@ updateApi.put = (args: { categoria: number | { id: number } } | [categoria: numb
  * @see app/Http/Controllers/CategoriaClienteController.php:73
  * @route '/api/categorias-cliente/{categoria}'
  */
-    const updateApiForm = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const updateApiForm = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: updateApi.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PUT',
@@ -312,7 +312,7 @@ updateApi.put = (args: { categoria: number | { id: number } } | [categoria: numb
  * @see app/Http/Controllers/CategoriaClienteController.php:73
  * @route '/api/categorias-cliente/{categoria}'
  */
-        updateApiForm.put = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        updateApiForm.put = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: updateApi.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PUT',
@@ -328,7 +328,7 @@ updateApi.put = (args: { categoria: number | { id: number } } | [categoria: numb
  * @see app/Http/Controllers/CategoriaClienteController.php:90
  * @route '/api/categorias-cliente/{categoria}'
  */
-export const destroyApi = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroyApi = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyApi.url(args, options),
     method: 'delete',
 })
@@ -343,7 +343,7 @@ destroyApi.definition = {
  * @see app/Http/Controllers/CategoriaClienteController.php:90
  * @route '/api/categorias-cliente/{categoria}'
  */
-destroyApi.url = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroyApi.url = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { categoria: args }
     }
@@ -376,7 +376,7 @@ destroyApi.url = (args: { categoria: number | { id: number } } | [categoria: num
  * @see app/Http/Controllers/CategoriaClienteController.php:90
  * @route '/api/categorias-cliente/{categoria}'
  */
-destroyApi.delete = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroyApi.delete = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyApi.url(args, options),
     method: 'delete',
 })
@@ -386,7 +386,7 @@ destroyApi.delete = (args: { categoria: number | { id: number } } | [categoria: 
  * @see app/Http/Controllers/CategoriaClienteController.php:90
  * @route '/api/categorias-cliente/{categoria}'
  */
-    const destroyApiForm = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyApiForm = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroyApi.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -401,7 +401,7 @@ destroyApi.delete = (args: { categoria: number | { id: number } } | [categoria: 
  * @see app/Http/Controllers/CategoriaClienteController.php:90
  * @route '/api/categorias-cliente/{categoria}'
  */
-        destroyApiForm.delete = (args: { categoria: number | { id: number } } | [categoria: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyApiForm.delete = (args: { categoria: string | number | { id: string | number } } | [categoria: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroyApi.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',

@@ -215,7 +215,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-export const show = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -230,7 +230,7 @@ show.definition = {
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-show.url = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { pago: args }
     }
@@ -263,7 +263,7 @@ show.url = (args: { pago: number | { id: number } } | [pago: number | { id: numb
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-show.get = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -272,7 +272,7 @@ show.get = (args: { pago: number | { id: number } } | [pago: number | { id: numb
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-show.head = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -282,7 +282,7 @@ show.head = (args: { pago: number | { id: number } } | [pago: number | { id: num
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-    const showForm = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    const showForm = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
         action: show.url(args, options),
         method: 'get',
     })
@@ -292,7 +292,7 @@ show.head = (args: { pago: number | { id: number } } | [pago: number | { id: num
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-        showForm.get = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        showForm.get = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: show.url(args, options),
             method: 'get',
         })
@@ -301,7 +301,7 @@ show.head = (args: { pago: number | { id: number } } | [pago: number | { id: num
  * @see app/Http/Controllers/PagoController.php:146
  * @route '/compras/pagos/{pago}'
  */
-        showForm.head = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        showForm.head = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: show.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
@@ -317,7 +317,7 @@ show.head = (args: { pago: number | { id: number } } | [pago: number | { id: num
  * @see app/Http/Controllers/PagoController.php:155
  * @route '/compras/pagos/{pago}'
  */
-export const destroy = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -332,7 +332,7 @@ destroy.definition = {
  * @see app/Http/Controllers/PagoController.php:155
  * @route '/compras/pagos/{pago}'
  */
-destroy.url = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { pago: args }
     }
@@ -365,7 +365,7 @@ destroy.url = (args: { pago: number | { id: number } } | [pago: number | { id: n
  * @see app/Http/Controllers/PagoController.php:155
  * @route '/compras/pagos/{pago}'
  */
-destroy.delete = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -375,7 +375,7 @@ destroy.delete = (args: { pago: number | { id: number } } | [pago: number | { id
  * @see app/Http/Controllers/PagoController.php:155
  * @route '/compras/pagos/{pago}'
  */
-    const destroyForm = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyForm = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroy.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -390,7 +390,7 @@ destroy.delete = (args: { pago: number | { id: number } } | [pago: number | { id
  * @see app/Http/Controllers/PagoController.php:155
  * @route '/compras/pagos/{pago}'
  */
-        destroyForm.delete = (args: { pago: number | { id: number } } | [pago: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyForm.delete = (args: { pago: string | number | { id: string | number } } | [pago: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroy.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
 export const metricas = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ metricas.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
 metricas.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ metricas.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
 metricas.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ metricas.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
 metricas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ metricas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
     const metricasForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ metricas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
         metricasForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ metricas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\DashboardController::metricas
- * @see app/Http/Controllers/DashboardController.php:41
+ * @see app/Http/Controllers/DashboardController.php:39
  * @route '/api/dashboard/metricas'
  */
         metricasForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ metricas.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     metricas.form = metricasForm
 /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
 export const graficos = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ graficos.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
 graficos.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ graficos.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
 graficos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ graficos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
 graficos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ graficos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
     const graficosForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ graficos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
         graficosForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ graficos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\DashboardController::graficos
- * @see app/Http/Controllers/DashboardController.php:54
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/graficos'
  */
         graficosForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -156,74 +156,74 @@ graficos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     graficos.form = graficosForm
 /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-export const productosMasVendidos = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: productosMasVendidos.url(options),
+export const productosMasComprados = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: productosMasComprados.url(options),
     method: 'get',
 })
 
-productosMasVendidos.definition = {
+productosMasComprados.definition = {
     methods: ["get","head"],
-    url: '/api/dashboard/productos-mas-vendidos',
+    url: '/api/dashboard/productos-mas-comprados',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-productosMasVendidos.url = (options?: RouteQueryOptions) => {
-    return productosMasVendidos.definition.url + queryParams(options)
+productosMasComprados.url = (options?: RouteQueryOptions) => {
+    return productosMasComprados.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-productosMasVendidos.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: productosMasVendidos.url(options),
+productosMasComprados.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: productosMasComprados.url(options),
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-productosMasVendidos.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: productosMasVendidos.url(options),
+productosMasComprados.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: productosMasComprados.url(options),
     method: 'head',
 })
 
     /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-    const productosMasVendidosForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: productosMasVendidos.url(options),
+    const productosMasCompradosForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: productosMasComprados.url(options),
         method: 'get',
     })
 
             /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-        productosMasVendidosForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: productosMasVendidos.url(options),
+        productosMasCompradosForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: productosMasComprados.url(options),
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\DashboardController::productosMasVendidos
- * @see app/Http/Controllers/DashboardController.php:73
- * @route '/api/dashboard/productos-mas-vendidos'
+* @see \App\Http\Controllers\DashboardController::productosMasComprados
+ * @see app/Http/Controllers/DashboardController.php:71
+ * @route '/api/dashboard/productos-mas-comprados'
  */
-        productosMasVendidosForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: productosMasVendidos.url({
+        productosMasCompradosForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: productosMasComprados.url({
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
                             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -232,10 +232,10 @@ productosMasVendidos.head = (options?: RouteQueryOptions): RouteDefinition<'head
             method: 'get',
         })
     
-    productosMasVendidos.form = productosMasVendidosForm
+    productosMasComprados.form = productosMasCompradosForm
 /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
 export const alertasStock = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -250,7 +250,7 @@ alertasStock.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
 alertasStock.url = (options?: RouteQueryOptions) => {
@@ -259,7 +259,7 @@ alertasStock.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
 alertasStock.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -268,7 +268,7 @@ alertasStock.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
 alertasStock.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -278,7 +278,7 @@ alertasStock.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
     const alertasStockForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -288,7 +288,7 @@ alertasStock.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
         alertasStockForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -297,7 +297,7 @@ alertasStock.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\DashboardController::alertasStock
- * @see app/Http/Controllers/DashboardController.php:86
+ * @see app/Http/Controllers/DashboardController.php:84
  * @route '/api/dashboard/alertas-stock'
  */
         alertasStockForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -311,90 +311,11 @@ alertasStock.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
     
     alertasStock.form = alertasStockForm
-/**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-export const ventasPorCanal = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: ventasPorCanal.url(options),
-    method: 'get',
-})
-
-ventasPorCanal.definition = {
-    methods: ["get","head"],
-    url: '/api/dashboard/ventas-por-canal',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-ventasPorCanal.url = (options?: RouteQueryOptions) => {
-    return ventasPorCanal.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-ventasPorCanal.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: ventasPorCanal.url(options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-ventasPorCanal.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: ventasPorCanal.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-    const ventasPorCanalForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: ventasPorCanal.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-        ventasPorCanalForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: ventasPorCanal.url(options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\DashboardController::ventasPorCanal
- * @see app/Http/Controllers/DashboardController.php:97
- * @route '/api/dashboard/ventas-por-canal'
- */
-        ventasPorCanalForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: ventasPorCanal.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    ventasPorCanal.form = ventasPorCanalForm
 const dashboard = {
     metricas,
 graficos,
-productosMasVendidos,
+productosMasComprados,
 alertasStock,
-ventasPorCanal,
 }
 
 export default dashboard
