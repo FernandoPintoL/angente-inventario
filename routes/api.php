@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AgenteWebhookController;
 use App\Http\Controllers\Api\ApiProformaController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EstadoMermaController;
@@ -26,8 +27,30 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
+// ==========================================
+// 🔗 WEBHOOKS DEL AGENTE EXTERNO
+// ==========================================
+Route::prefix('webhooks/agente')->middleware(['agente.webhook'])->group(function () {
+    Route::post('/notificacion', [AgenteWebhookController::class, 'recibirNotificacion'])->name('webhooks.agente.notificacion');
+    Route::get('/ping', [AgenteWebhookController::class, 'ping'])->name('webhooks.agente.ping');
+    Route::get('/historial', [AgenteWebhookController::class, 'historial'])->name('webhooks.agente.historial');
+});
+
 // Rutas API para módulos del sidebar (requiere autenticación)
 Route::middleware(['auth'])->get('/modulos-sidebar', [App\Http\Controllers\ModuloSidebarController::class, 'apiIndex'])->name('api.modulos-sidebar');
+
+// ==========================================
+// 🔔 NOTIFICACIONES (Web + API)
+// ==========================================
+Route::middleware(['auth:sanctum,web'])->prefix('notificaciones')->group(function () {
+    Route::get('/', [App\Http\Controllers\NotificacionController::class, 'index']);
+    Route::get('/no-leidas', [App\Http\Controllers\NotificacionController::class, 'noLeidas']);
+    Route::get('/count', [App\Http\Controllers\NotificacionController::class, 'contarNoLeidas']);
+    Route::post('/{id}/marcar-leida', [App\Http\Controllers\NotificacionController::class, 'marcarComoLeida']);
+    Route::post('/marcar-todas-leidas', [App\Http\Controllers\NotificacionController::class, 'marcarTodasComoLeidas']);
+    Route::delete('/{id}', [App\Http\Controllers\NotificacionController::class, 'eliminar']);
+    Route::delete('/leidas/eliminar', [App\Http\Controllers\NotificacionController::class, 'eliminarLeidas']);
+});
 
 // ==========================================
 // 📱 RUTAS PARA APP EXTERNA (Flutter)

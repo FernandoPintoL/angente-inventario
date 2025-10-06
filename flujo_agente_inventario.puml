@@ -1,0 +1,322 @@
+@startuml Flujo de Agente de Inventario
+!theme cerulean-outline
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+skinparam BoxPadding 10
+skinparam ParticipantPadding 20
+
+title Flujo de Trabajo: Consulta al Agente de Inventario\n(Frontend → Backend → Agente Externo)
+
+' === ACTORES Y PARTICIPANTES ===
+actor Usuario as user #LightBlue
+participant "index.tsx\n(Página Principal)" as page #LightGreen
+participant "AgentContext\n(Context Provider)" as context #Yellow
+participant "ChatBot\n(Componente)" as chatbot #LightGreen
+participant "VoiceInput\n(Opcional)" as voice #LightGreen
+box "Frontend (React + Inertia)" #LightYellow
+    participant page
+    participant context
+    participant chatbot
+    participant voice
+end box
+
+participant "Laravel Router\n(web.php)" as router #Orange
+participant "AgenteInventario\nController" as controller #Orange
+box "Backend (Laravel)" #LightSalmon
+    participant router
+    participant controller
+end box
+
+participant "AgenteInventario\nService" as service #Pink
+participant "ConversacionAgente\n(Model)" as model #Pink
+database "Base de Datos\nLocal (SQLite)" as db #LightGray
+box "Capa de Servicio" #MistyRose
+    participant service
+    participant model
+    participant db
+end box
+
+participant "Agente Externo\n(Python FastAPI)" as agent #LightBlue
+database "Base de Datos\nInventario" as inventory_db #LightGray
+box "Agente Inteligente Externo" #AliceBlue
+    participant agent
+    participant inventory_db
+end box
+
+' === FLUJO PRINCIPAL ===
+== Inicialización de la Página ==
+user -> page: Accede a /agente
+activate page
+
+page -> context: Verifica permisos\n(canUseAgent)
+activate context
+context -> page: Permisos validados
+deactivate context
+
+page -> context: useEffect() ejecuta\nopenChat()
+activate context
+context -> chatbot: Abre ventana de chat
+activate chatbot
+chatbot -> context: Renderiza mensaje inicial
+context --> page: Chat abierto
+deactivate context
+deactivate chatbot
+
+page -> user: Muestra interfaz\ncon mensaje de bienvenida
+deactivate page
+
+== Consulta del Usuario (Texto) ==
+user -> chatbot: Escribe consulta\n"¿Cuál es el stock del producto ABC-123?"
+activate chatbot
+
+chatbot -> chatbot: Usuario presiona Enter\no botón Enviar
+
+chatbot -> context: sendMessage(query)
+activate context
+
+context -> context: Crea mensaje usuario\n{type: 'user', content: query}
+
+context -> context: setMessages([...messages, userMessage])
+
+context -> context: setIsLoading(true)
+
+context -> router: POST /api/agente/ask\nBody: {query, context}
+activate router
+note right
+  Headers:
+  - Content-Type: application/json
+  - X-CSRF-TOKEN
+  - Cookie (auth session)
+end note
+
+router -> router: Verifica middleware\npermission:agente.use
+
+router -> controller: ask(Request $request)
+activate controller
+
+controller -> controller: Validar request\nValidator::make()
+note right
+  Validaciones:
+  - query: required|string|max:1000
+  - context: sometimes|array
+  - user_id: sometimes|string
+end note
+
+alt Validación fallida
+    controller -> router: 422 Unprocessable Entity
+    router -> context: Error de validación
+    context -> chatbot: Muestra error
+    chatbot -> user: "Datos inválidos"
+else Validación exitosa
+    controller -> model: ConversacionAgente::create()
+    activate model
+    model -> db: INSERT conversacion\n(user_id, query, context, session_id)
+    activate db
+    db --> model: ID conversación creado
+    deactivate db
+    deactivate model
+
+    controller -> service: ask(userId, query, context)
+    activate service
+    
+    service -> service: Preparar payload\n{human_query, include_table_info, limit_results}
+    
+    service -> agent: POST /api/v1/query\nBody: payload
+    activate agent
+    note right
+      Payload del agente:
+      {
+        "human_query": "¿Cuál es el stock...?",
+        "include_table_info": false,
+        "limit_results": 100
+      }
+    end note
+    
+    agent -> agent: Procesa lenguaje natural\ncon NLP/LLM
+    
+    agent -> agent: Genera consulta SQL
+    note right
+      Ejemplo SQL generado:
+      SELECT p.nombre, sp.cantidad
+      FROM productos p
+      JOIN stock_productos sp ON p.id = sp.producto_id
+      WHERE p.codigo = 'ABC-123'
+    end note
+    
+    agent -> inventory_db: Ejecuta SQL\nquery generada
+    activate inventory_db
+    inventory_db --> agent: Resultados (rows)
+    deactivate inventory_db
+    
+    agent -> agent: Genera respuesta natural\ncon contexto de resultados
+    
+    agent -> service: 200 OK\n{answer, sql_query, results, confidence, metadata}
+    deactivate agent
+    note left
+      Respuesta del agente:
+      {
+        "answer": "El producto ABC-123 tiene 150 unidades...",
+        "sql_query": "SELECT...",
+        "results": [...],
+        "confidence": 0.95,
+        "metadata": {...}
+      }
+    end note
+    
+    service -> service: transformAgentResponse()\nFormatea respuesta
+    note right
+      Transforma a formato frontend:
+      {
+        "response": string,
+        "confidence": float,
+        "intent": string,
+        "data": array,
+        "success": boolean
+      }
+    end note
+    
+    service --> controller: Array transformado
+    deactivate service
+    
+    controller -> model: $conversacion->update()
+    activate model
+    model -> db: UPDATE conversacion\nSET response, status='completed'
+    activate db
+    db --> model: Actualizado
+    deactivate db
+    deactivate model
+    
+    controller -> router: 200 OK\nJSON response
+    deactivate controller
+    
+    router -> context: Response successful
+    deactivate router
+    
+    context -> context: Crea mensaje agente\n{type: 'agent', content, data}
+    
+    context -> context: setMessages([...messages, agentMessage])
+    
+    context -> context: setIsLoading(false)
+    
+    context -> chatbot: Actualiza UI
+    deactivate context
+    
+    chatbot -> user: Muestra respuesta del agente\ncon DataFormatter
+    deactivate chatbot
+end
+
+== Consulta del Usuario (Voz - Opcional) ==
+user -> voice: Presiona botón micrófono
+activate voice
+
+voice -> voice: Inicia grabación\nWeb Speech API
+
+user -> voice: Habla consulta
+
+voice -> voice: Transcribe audio\na texto
+
+voice -> chatbot: onTranscript(text)
+deactivate voice
+activate chatbot
+
+chatbot -> context: sendMessage(transcript)
+note right: El flujo continúa igual que\nla consulta por texto
+deactivate chatbot
+
+== Visualización de Datos ==
+chatbot -> chatbot: DataFormatter\nanaliza response.data
+activate chatbot
+
+alt data contiene array de productos
+    chatbot -> chatbot: Renderiza tabla\ncon columnas dinámicas
+else data contiene estadísticas
+    chatbot -> chatbot: Renderiza cards\ncon métricas
+else data contiene alertas
+    chatbot -> chatbot: Renderiza badges\ncon nivel de alerta
+end
+
+chatbot -> user: Visualización formateada
+deactivate chatbot
+
+== Manejo de Errores ==
+alt Agente externo no disponible
+    service -> service: catch Exception
+    activate service
+    service -> service: handleLocalFallback(query)\nIntenta responder con datos locales
+    
+    alt Puede responder localmente
+        service -> db: Consulta directa a DB
+        activate db
+        db --> service: Datos básicos
+        deactivate db
+        service --> controller: Respuesta fallback
+    else No puede responder
+        service --> controller: Error response\n{success: false, confidence: 0}
+    end
+    deactivate service
+    
+    controller -> model: update(status='failed')
+    controller -> router: 500 Server Error\no respuesta degradada
+    router -> context: Error response
+    context -> chatbot: Mensaje de error
+    chatbot -> user: "El agente no está disponible"
+end
+
+== Verificación de Salud (Health Check) ==
+context -> router: GET /api/agente/health
+activate router
+router -> controller: health()
+activate controller
+controller -> service: getHealthStatus()
+activate service
+service -> agent: GET /api/v1/health
+activate agent
+agent --> service: {status, service, version, statistics}
+deactivate agent
+service --> controller: Array normalizado
+deactivate service
+controller --> router: JSON {status: 'healthy', external_agent: {...}}
+deactivate controller
+router --> context: 200 OK
+deactivate router
+context -> page: Actualiza badge\n"Agente Conectado" (verde)
+
+== Consulta de Historial ==
+user -> chatbot: Click botón Historial
+activate chatbot
+chatbot -> context: Solicita historial
+activate context
+context -> router: GET /api/agente/historial
+activate router
+router -> router: Verifica\npermission:agente.history
+router -> controller: historial()
+activate controller
+controller -> model: ConversacionAgente::query()
+activate model
+model -> db: SELECT * FROM conversaciones_agente\nWHERE user_id = ?
+activate db
+db --> model: Registros de conversaciones
+deactivate db
+model --> controller: Collection
+deactivate model
+controller --> router: JSON array
+deactivate controller
+router --> context: Lista de conversaciones
+deactivate router
+context -> chatbot: Muestra panel lateral\ncon historial
+deactivate context
+chatbot -> user: Lista de conversaciones\nprevias
+deactivate chatbot
+
+== Limpieza de Mensajes ==
+user -> chatbot: Click botón "Limpiar"
+activate chatbot
+chatbot -> context: clearMessages()
+activate context
+context -> context: setMessages([mensajeInicial])
+context -> chatbot: Mensajes limpiados
+deactivate context
+chatbot -> user: Chat reiniciado
+deactivate chatbot
+
+@enduml

@@ -32,9 +32,10 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\HandleCors::class,
         ]);
 
-        // Excluir rutas del middleware CSRF para testing
+        // Excluir rutas del middleware CSRF para testing y webhooks
         $middleware->validateCsrfTokens(except: [
             'test-csrf',
+            'api/webhooks/*',
         ]);
 
         // Aliases for Spatie Permission middlewares
@@ -42,6 +43,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
+            'agente.webhook' => \App\Http\Middleware\ValidateAgenteWebhook::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

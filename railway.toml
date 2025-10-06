@@ -1,0 +1,13 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+restartPolicyType = "on-failure"
+restartPolicyMaxRetries = 10
+
+# Definir servicios múltiples para Railway
+# Necesitarás crear 3 servicios en Railway:
+# 1. Web service (ejecuta el proceso 'web' del Procfile)
+# 2. Worker service (ejecuta el proceso 'worker' del Procfile)
+# 3. Scheduler service (ejecuta el proceso 'scheduler' del Procfile)

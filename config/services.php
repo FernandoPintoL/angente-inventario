@@ -54,4 +54,20 @@ return [
         'modalidad' => env('SIN_MODALIDAD', 1),       // 1=Electronico, 2=Computarizada
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Agente de Inventario Externo
+    |--------------------------------------------------------------------------
+    |
+    | Configuración para la integración con el agente externo de inventario
+    | que puede enviar notificaciones mediante webhooks.
+    |
+    */
+    'agente_inventario' => [
+        'url' => env('AGENTE_INVENTARIO_URL'),
+        'timeout' => env('AGENTE_INVENTARIO_TIMEOUT', 30),
+        'webhook_token' => env('AGENTE_WEBHOOK_TOKEN'),
+        'allowed_ips' => array_filter(explode(',', env('AGENTE_ALLOWED_IPS', ''))),
+    ],
+
 ];

@@ -113,4 +113,21 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Alert Spam Interval (Hours)
+    |--------------------------------------------------------------------------
+    |
+    | Controls the minimum time between repeated alerts for the same event.
+    | This prevents spam when monitoring stock levels or expiration dates.
+    |
+    | Examples:
+    | - 24 = 1 day (production)
+    | - 0.0833 = 5 minutes (testing/demo)
+    | - 0.0167 = 1 minute (quick testing)
+    |
+    */
+
+    'alert_spam_interval_hours' => env('ALERT_SPAM_INTERVAL_HOURS', 24),
+
 ];

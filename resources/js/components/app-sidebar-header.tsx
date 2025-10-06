@@ -1,4 +1,5 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
+import { NotificationsDropdown } from '@/components/notifications-dropdown';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { AgentQuickAccess, AgentQuickButton } from '@/components/agente/AgentQuickAccess';
 import { AgentShortcutsHelp, AgentShortcutHint } from '@/components/agente/AgentShortcutsHelp';
@@ -14,6 +15,9 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
 
             {/* Agente Quick Access */}
             <div className="flex items-center gap-2">
+                {/* Notificaciones */}
+                <NotificationsDropdown />
+
                 {/* Hint de atajo para pantallas grandes */}
                 <AgentShortcutHint />
 

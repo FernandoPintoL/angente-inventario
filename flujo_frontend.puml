@@ -1,0 +1,36 @@
+@startuml Flujo Frontend
+!theme cerulean-outline
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 100
+skinparam ParticipantPadding 10
+
+title Flujo Frontend: Componentes React
+
+actor Usuario as user
+participant "ChatBot" as chatbot
+participant "AgentContext" as context
+participant "API" as api
+
+user -> chatbot: Escribe consulta
+activate chatbot
+
+chatbot -> context: sendMessage(query)
+activate context
+
+context -> context: setIsLoading(true)
+context -> api: POST /api/agente/ask
+activate api
+
+api --> context: Respuesta
+deactivate api
+
+context -> context: setMessages()
+context -> context: setIsLoading(false)
+context --> chatbot: Actualiza UI
+deactivate context
+
+chatbot --> user: Muestra respuesta
+deactivate chatbot
+
+@enduml

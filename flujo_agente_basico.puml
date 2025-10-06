@@ -1,0 +1,47 @@
+@startuml Flujo Básico del Agente
+!theme cerulean-outline
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 100
+skinparam ParticipantPadding 10
+
+title Flujo Básico: Consulta al Agente de Inventario
+
+actor Usuario as user
+participant "Frontend\n(React + Inertia)" as frontend
+participant "Backend\n(Laravel)" as backend
+participant "Servicio\nAgente" as service
+participant "Agente\nExterno" as agent
+database "BD" as db
+
+user -> frontend: Realiza consulta
+activate frontend
+
+frontend -> backend: POST /api/agente/ask
+activate backend
+
+backend -> service: ask(query)
+activate service
+
+service -> agent: POST /api/v1/query
+activate agent
+
+agent -> db: Consulta SQL
+activate db
+db --> agent: Resultados
+deactivate db
+
+agent --> service: Respuesta
+deactivate agent
+
+service --> backend: Datos formateados
+deactivate service
+
+backend --> frontend: JSON response
+deactivate backend
+
+frontend -> frontend: Formatea datos
+frontend --> user: Muestra respuesta
+deactivate frontend
+
+@enduml

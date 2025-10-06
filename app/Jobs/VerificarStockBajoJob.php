@@ -52,15 +52,18 @@ class VerificarStockBajoJob implements ShouldQueue
         foreach ($productosStockBajo as $producto) {
             $stockActual = $producto->stockTotal();
 
+            // Obtener intervalo de spam desde config (en horas)
+            $spamInterval = (float) config('mail.alert_spam_interval_hours', 24);
+
             // Verificar si ya se envió notificación recientemente (evitar spam)
             $notificacionReciente = DB::table('notifications')
                 ->where('type', StockBajoNotification::class)
                 ->where('data->producto_id', $producto->id)
-                ->where('created_at', '>', now()->subHours(24))
+                ->where('created_at', '>', now()->subHours($spamInterval))
                 ->exists();
 
             if ($notificacionReciente) {
-                continue; // Saltar si ya se notificó en las últimas 24 horas
+                continue; // Saltar si ya se notificó recientemente
             }
 
             // Enviar notificación a todos los usuarios relevantes

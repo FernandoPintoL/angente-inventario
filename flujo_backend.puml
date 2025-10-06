@@ -1,0 +1,50 @@
+@startuml Flujo Backend
+!theme cerulean-outline
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+skinparam maxMessageSize 100
+skinparam ParticipantPadding 10
+
+title Flujo Backend: Procesamiento Laravel
+
+participant "Router" as router
+participant "Controller" as controller
+participant "Service" as service
+participant "Model" as model
+database "Database" as db
+participant "Agente" as agent
+
+router -> controller: ask(Request)
+activate controller
+
+controller -> controller: Validar request
+controller -> model: create()
+activate model
+
+model -> db: INSERT
+activate db
+db --> model: ID
+deactivate db
+deactivate model
+
+controller -> service: ask(query)
+activate service
+
+service -> agent: POST query
+activate agent
+agent --> service: Respuesta
+deactivate agent
+
+service -> service: transformResponse()
+service --> controller: Datos formateados
+deactivate service
+
+controller -> model: update()
+activate model
+model -> db: UPDATE
+deactivate model
+
+controller --> router: JSON response
+deactivate controller
+
+@enduml

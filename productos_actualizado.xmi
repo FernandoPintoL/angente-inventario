@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.omg.org/spec/UML/20110701">
+  <xmi:Documentation exporter="PlantUML Converter" exporterVersion="1.0"/>
+  <uml:Model xmi:id="model" name="ProductosModel">
+    <packagedElement xmi:type="uml:Package" xmi:id="package" name="Productos">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_productos" name="productos">
+        <ownedAttribute xmi:id="attr_productos_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_productos_descripcion" name="descripcion">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_productos_activo" name="activo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_productos_es_alquilable" name="es_alquilable">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_productos_marca_id" name="marca_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_productos_controlar_stock" name="controlar_stock">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_productos_proveedor_id" name="proveedor_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_categorias" name="categorias">
+        <ownedAttribute xmi:id="attr_categorias_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_categorias_descripcion" name="descripcion">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_marcas" name="marcas">
+        <ownedAttribute xmi:id="attr_marcas_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_marcas_descripcion" name="descripcion">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_unidades_medida" name="unidades_medida">
+        <ownedAttribute xmi:id="attr_unidades_medida_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_unidades_medida_nombre" name="nombre">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_unidades_medida_updated_at" name="updated_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_stock_productos" name="stock_productos">
+        <ownedAttribute xmi:id="attr_stock_productos_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_stock_productos_almacen_id" name="almacen_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_stock_productos_fecha_actualizacion" name="fecha_actualizacion">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_stock_productos_cantidad_disponible" name="cantidad_disponible">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_movimientos_inventario" name="movimientos_inventario">
+        <ownedAttribute xmi:id="attr_movimientos_inventario_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_cantidad_anterior" name="cantidad_anterior">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_cantidad_posterior" name="cantidad_posterior">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_observacion" name="observacion">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_tipo_merma_id" name="tipo_merma_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_anulado" name="anulado">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_user_anulacion_id" name="user_anulacion_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_referencia_tipo" name="referencia_tipo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_deleted_at" name="deleted_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_movimientos_inventario_updated_at" name="updated_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_tipo_mermas" name="tipo_mermas">
+        <ownedAttribute xmi:id="attr_tipo_mermas_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_tipo_mermas_label" name="label">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_tipo_mermas_created_at" name="created_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_tipos_ajuste_inventario" name="tipos_ajuste_inventario">
+        <ownedAttribute xmi:id="attr_tipos_ajuste_inventario_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_tipos_ajuste_inventario_label" name="label">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_tipos_ajuste_inventario_updated_at" name="updated_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_estado_mermas" name="estado_mermas">
+        <ownedAttribute xmi:id="attr_estado_mermas_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_estado_mermas_label" name="label">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_estado_mermas_created_at" name="created_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_transferencia_inventarios" name="transferencia_inventarios">
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_fecha" name="fecha">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_almacen_destino_id" name="almacen_destino_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_estado" name="estado">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_vehiculo_id" name="vehiculo_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_total_productos" name="total_productos">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_transferencia_inventarios_created_at" name="created_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_detalle_transferencia_inventarios" name="detalle_transferencia_inventarios">
+        <ownedAttribute xmi:id="attr_detalle_transferencia_inventarios_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_detalle_transferencia_inventarios_producto_id" name="producto_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_detalle_transferencia_inventarios_lote" name="lote">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_detalle_transferencia_inventarios_observaciones" name="observaciones">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_configuracion_ganancias" name="configuracion_ganancias">
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_tipo_precio_id" name="tipo_precio_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_margen_minimo" name="margen_minimo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_margen_maximo" name="margen_maximo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_NOT" name="NOT">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_activo" name="activo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_configuracion_ganancias_updated_at" name="updated_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_precios_producto" name="precios_producto">
+        <ownedAttribute xmi:id="attr_precios_producto_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_precios_producto_tipo_precio_id" name="tipo_precio_id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_precios_producto_precio" name="precio">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_precios_producto_porcentaje_ganancia" name="porcentaje_ganancia">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_precios_producto_fecha_inicio" name="fecha_inicio">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_precios_producto_activo" name="activo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_precios_producto_tipo_cliente" name="tipo_cliente">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_historial_precios" name="historial_precios">
+        <ownedAttribute xmi:id="attr_historial_precios_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_historial_precios_valor_anterior" name="valor_anterior">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_historial_precios_NOT" name="NOT">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_historial_precios_motivo" name="motivo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_historial_precios_updated_at" name="updated_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_imagenes_producto" name="imagenes_producto">
+        <ownedAttribute xmi:id="attr_imagenes_producto_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_imagenes_producto_url" name="url">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_imagenes_producto_created_at" name="created_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_codigos_barra" name="codigos_barra">
+        <ownedAttribute xmi:id="attr_codigos_barra_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_codigos_barra_codigo" name="codigo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_codigos_barra_created_at" name="created_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_almacenes" name="almacenes">
+        <ownedAttribute xmi:id="attr_almacenes_id" name="id">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_almacenes_direccion" name="direccion">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_almacenes_updated_at" name="updated_at">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="attr_almacenes_requiere_transporte_externo" name="requiere_transporte_externo">
+          <type xmi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_0" name="codigos_barra_productos">
+        <memberEnd xmi:idref="prop_codigos_barra_productos"/>
+        <memberEnd xmi:idref="prop_productos_codigos_barra"/>
+        <ownedEnd xmi:id="prop_codigos_barra_productos" type="class_productos"/>
+        <ownedEnd xmi:id="prop_productos_codigos_barra" type="class_codigos_barra"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_1" name="configuracion_ganancias_productos">
+        <memberEnd xmi:idref="prop_configuracion_ganancias_productos"/>
+        <memberEnd xmi:idref="prop_productos_configuracion_ganancias"/>
+        <ownedEnd xmi:id="prop_configuracion_ganancias_productos" type="class_productos"/>
+        <ownedEnd xmi:id="prop_productos_configuracion_ganancias" type="class_configuracion_ganancias"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_2" name="detalle_transferencia_inventarios_productos">
+        <memberEnd xmi:idref="prop_detalle_transferencia_inventarios_productos"/>
+        <memberEnd xmi:idref="prop_productos_detalle_transferencia_inventarios"/>
+        <ownedEnd xmi:id="prop_detalle_transferencia_inventarios_productos" type="class_productos"/>
+        <ownedEnd xmi:id="prop_productos_detalle_transferencia_inventarios" type="class_detalle_transferencia_inventarios"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_3" name="detalle_transferencia_inventarios_transferencia_inventarios">
+        <memberEnd xmi:idref="prop_detalle_transferencia_inventarios_transferencia_inventarios"/>
+        <memberEnd xmi:idref="prop_transferencia_inventarios_detalle_transferencia_inventarios"/>
+        <ownedEnd xmi:id="prop_detalle_transferencia_inventarios_transferencia_inventarios" type="class_transferencia_inventarios"/>
+        <ownedEnd xmi:id="prop_transferencia_inventarios_detalle_transferencia_inventarios" type="class_detalle_transferencia_inventarios"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_4" name="historial_precios_precios_producto">
+        <memberEnd xmi:idref="prop_historial_precios_precios_producto"/>
+        <memberEnd xmi:idref="prop_precios_producto_historial_precios"/>
+        <ownedEnd xmi:id="prop_historial_precios_precios_producto" type="class_precios_producto"/>
+        <ownedEnd xmi:id="prop_precios_producto_historial_precios" type="class_historial_precios"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_5" name="imagenes_producto_productos">
+        <memberEnd xmi:idref="prop_imagenes_producto_productos"/>
+        <memberEnd xmi:idref="prop_productos_imagenes_producto"/>
+        <ownedEnd xmi:id="prop_imagenes_producto_productos" type="class_productos"/>
+        <ownedEnd xmi:id="prop_productos_imagenes_producto" type="class_imagenes_producto"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_6" name="movimientos_inventario_estado_mermas">
+        <memberEnd xmi:idref="prop_movimientos_inventario_estado_mermas"/>
+        <memberEnd xmi:idref="prop_estado_mermas_movimientos_inventario"/>
+        <ownedEnd xmi:id="prop_movimientos_inventario_estado_mermas" type="class_estado_mermas"/>
+        <ownedEnd xmi:id="prop_estado_mermas_movimientos_inventario" type="class_movimientos_inventario"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_7" name="movimientos_inventario_stock_productos">
+        <memberEnd xmi:idref="prop_movimientos_inventario_stock_productos"/>
+        <memberEnd xmi:idref="prop_stock_productos_movimientos_inventario"/>
+        <ownedEnd xmi:id="prop_movimientos_inventario_stock_productos" type="class_stock_productos"/>
+        <ownedEnd xmi:id="prop_stock_productos_movimientos_inventario" type="class_movimientos_inventario"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_8" name="movimientos_inventario_tipos_ajuste_inventario">
+        <memberEnd xmi:idref="prop_movimientos_inventario_tipos_ajuste_inventario"/>
+        <memberEnd xmi:idref="prop_tipos_ajuste_inventario_movimientos_inventario"/>
+        <ownedEnd xmi:id="prop_movimientos_inventario_tipos_ajuste_inventario" type="class_tipos_ajuste_inventario"/>
+        <ownedEnd xmi:id="prop_tipos_ajuste_inventario_movimientos_inventario" type="class_movimientos_inventario"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_9" name="movimientos_inventario_tipo_mermas">
+        <memberEnd xmi:idref="prop_movimientos_inventario_tipo_mermas"/>
+        <memberEnd xmi:idref="prop_tipo_mermas_movimientos_inventario"/>
+        <ownedEnd xmi:id="prop_movimientos_inventario_tipo_mermas" type="class_tipo_mermas"/>
+        <ownedEnd xmi:id="prop_tipo_mermas_movimientos_inventario" type="class_movimientos_inventario"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_10" name="precios_producto_productos">
+        <memberEnd xmi:idref="prop_precios_producto_productos"/>
+        <memberEnd xmi:idref="prop_productos_precios_producto"/>
+        <ownedEnd xmi:id="prop_precios_producto_productos" type="class_productos"/>
+        <ownedEnd xmi:id="prop_productos_precios_producto" type="class_precios_producto"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_11" name="productos_categorias">
+        <memberEnd xmi:idref="prop_productos_categorias"/>
+        <memberEnd xmi:idref="prop_categorias_productos"/>
+        <ownedEnd xmi:id="prop_productos_categorias" type="class_categorias"/>
+        <ownedEnd xmi:id="prop_categorias_productos" type="class_productos"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_12" name="productos_marcas">
+        <memberEnd xmi:idref="prop_productos_marcas"/>
+        <memberEnd xmi:idref="prop_marcas_productos"/>
+        <ownedEnd xmi:id="prop_productos_marcas" type="class_marcas"/>
+        <ownedEnd xmi:id="prop_marcas_productos" type="class_productos"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_13" name="productos_unidades_medida">
+        <memberEnd xmi:idref="prop_productos_unidades_medida"/>
+        <memberEnd xmi:idref="prop_unidades_medida_productos"/>
+        <ownedEnd xmi:id="prop_productos_unidades_medida" type="class_unidades_medida"/>
+        <ownedEnd xmi:id="prop_unidades_medida_productos" type="class_productos"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_14" name="stock_productos_almacenes">
+        <memberEnd xmi:idref="prop_stock_productos_almacenes"/>
+        <memberEnd xmi:idref="prop_almacenes_stock_productos"/>
+        <ownedEnd xmi:id="prop_stock_productos_almacenes" type="class_almacenes"/>
+        <ownedEnd xmi:id="prop_almacenes_stock_productos" type="class_stock_productos"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_15" name="stock_productos_productos">
+        <memberEnd xmi:idref="prop_stock_productos_productos"/>
+        <memberEnd xmi:idref="prop_productos_stock_productos"/>
+        <ownedEnd xmi:id="prop_stock_productos_productos" type="class_productos"/>
+        <ownedEnd xmi:id="prop_productos_stock_productos" type="class_stock_productos"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_16" name="transferencia_inventarios_almacenes">
+        <memberEnd xmi:idref="prop_transferencia_inventarios_almacenes"/>
+        <memberEnd xmi:idref="prop_almacenes_transferencia_inventarios"/>
+        <ownedEnd xmi:id="prop_transferencia_inventarios_almacenes" type="class_almacenes"/>
+        <ownedEnd xmi:id="prop_almacenes_transferencia_inventarios" type="class_transferencia_inventarios"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="assoc_17" name="transferencia_inventarios_almacenes">
+        <memberEnd xmi:idref="prop_transferencia_inventarios_almacenes"/>
+        <memberEnd xmi:idref="prop_almacenes_transferencia_inventarios"/>
+        <ownedEnd xmi:id="prop_transferencia_inventarios_almacenes" type="class_almacenes"/>
+        <ownedEnd xmi:id="prop_almacenes_transferencia_inventarios" type="class_transferencia_inventarios"/>
+      </packagedElement>
+    </packagedElement>
+  </uml:Model>
+</xmi:XMI>

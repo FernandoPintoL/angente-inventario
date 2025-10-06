@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -21,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // Roles y Permisos
         $this->call(AgentePermissionsSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
+        $this->call(InventarioRolesSeeder::class);
         $this->call(EmpleadoRolesSeeder::class);
 
         // Catálogos Base
@@ -56,9 +56,9 @@ class DatabaseSeeder extends Seeder
         $admin = User::query()->where('email', 'admin@paucara.test')->first();
         if (! $admin) {
             $admin = User::factory()->create([
-                'name' => 'Administrador',
+                'name'     => 'Administrador',
                 'usernick' => 'admin',
-                'email' => 'admin@paucara.test',
+                'email'    => 'admin@paucara.test',
                 'password' => Hash::make('password'),
             ]);
         } else {
@@ -80,7 +80,10 @@ class DatabaseSeeder extends Seeder
         // SEEDERS DE DATOS DE PRUEBA - Inventario y Compras
         // =====================================================
         $this->call(InventarioComprasSeeder::class);
-        
+
+        $this->call(ProductosEjemploSeeder::class);
+        $this->call(TransferenciaInventarioSeeder::class);
+
         $this->command->info('✅ Base de datos poblada exitosamente!');
         $this->command->info('📧 Usuario: admin@paucara.test');
         $this->command->info('🔑 Contraseña: password');

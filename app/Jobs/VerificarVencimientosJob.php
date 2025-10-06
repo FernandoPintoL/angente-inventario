@@ -47,11 +47,14 @@ class VerificarVencimientosJob implements ShouldQueue
             $usuarios = User::take(1)->get();
         }
 
+        // Obtener intervalo de spam desde config (en horas)
+        $spamInterval = (float) config('mail.alert_spam_interval_hours', 24);
+
         // Verificar si ya se envió notificación recientemente
         $notificacionReciente = \DB::table('notifications')
             ->where('type', ProductoProximoVencerNotification::class)
             ->where('data->dias_anticipacion', $this->diasAnticipacion)
-            ->where('created_at', '>', now()->subHours(24))
+            ->where('created_at', '>', now()->subHours($spamInterval))
             ->exists();
 
         if ($notificacionReciente) {
