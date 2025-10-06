@@ -2,7 +2,6 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 

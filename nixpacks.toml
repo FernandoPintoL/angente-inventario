@@ -1,0 +1,22 @@
+[phases.setup]
+nixPkgs = ["php82", "nodejs_20", "npm"]
+
+[phases.install]
+cmds = [
+    "composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist",
+    "npm ci --production=false"
+]
+
+[phases.build]
+cmds = [
+    "npm run build",
+    "php artisan config:clear",
+    "php artisan route:clear",
+    "php artisan view:clear"
+]
+
+[phases.deploy]
+cmds = ["php artisan migrate --force"]
+
+[start]
+cmd = "php -S 0.0.0.0:${PORT:-8000} -t public"
