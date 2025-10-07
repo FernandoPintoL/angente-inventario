@@ -19,6 +19,12 @@ class AgenteWebhookController extends Controller
     public function recibirNotificacion(Request $request)
     {
         try {
+            // Log del payload recibido para debugging
+            Log::info('Webhook recibido del agente', [
+                'payload' => $request->all(),
+                'headers' => $request->headers->all(),
+            ]);
+
             // Validar estructura básica
             $validated = $request->validate([
                 'tipo' => 'required|string',
